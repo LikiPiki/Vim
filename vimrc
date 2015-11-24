@@ -17,12 +17,16 @@ call vundle#begin('~/some/path/here')
  Plugin 'scrooloose/nerdtree'
  Plugin 'bling/vim-airline'
  Plugin 'mattn/emmet-vim'
+ Plugin 'haya14busa/incsearch.vim'
  Plugin 'vim-scripts/tComment'
+ Plugin 'kien/ctrlp.vim'
  Plugin 'terryma/vim-multiple-cursors'
+ Plugin 'vim-scripts/vim-auto-save'
  Plugin 'Lokaltog/vim-powerline'
  Plugin 'honza/vim-snippets'
  Plugin 'Shougo/neocomplcache.vim'
  Plugin 'thinca/vim-quickrun'
+ Plugin 'easymotion/vim-easymotion'
  Plugin 'Shougo/neocomplete'
  Plugin 'nanotech/jellybeans.vim'
  Plugin 'Shougo/neosnippet'
@@ -80,9 +84,12 @@ set smarttab
 set expandtab
 set smartindent
 
-imap [ []<LEFT>
-imap ( ()<LEFT>
-imap { {}<LEFT>
+" Gif config
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)))
+"CntrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 "Synstasic settings
 let g:syntastic_enable_signs=1
@@ -99,10 +106,17 @@ map <C-e> :tabclose<CR>
 "Emmet setUp
 let g:user_emmet_expandabbr_key = '<TAB>'
 
-"NeosnippetSetUp
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+map <D-s> :w <CR>
+map <D-w> :!q<CR>
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 "Clang
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
@@ -113,4 +127,7 @@ set nobackup
 set noswapfile
 set encoding=utf-8 " Кодировка файлов по умолчанию
 set fileencodings=utf8,cp1251 " Возможные кодировки файлов, если файл не в unicode кодировке,
-" то будет использоваться cp1251
+
+let g:auto_save = 1 
+let g:auto_save_no_updatetime = 1
+let g:auto_save_in_insert_mode = 0
