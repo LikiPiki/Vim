@@ -1,4 +1,3 @@
-
 filetype on                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -14,27 +13,20 @@ call vundle#begin('~/some/path/here')
 " " plugin on GitHub repo
  Plugin 'tpope/vim-fugitive'
  Plugin 'altercation/vim-colors-solarized'
+ Plugin 'tpope/vim-surround'
  Plugin 'scrooloose/nerdtree'
- Plugin 'bling/vim-airline'
- Plugin 'christoomey/vim-tmux-navigator'
- Plugin 'mattn/emmet-vim'
- Plugin 'chriskempson/base16-vim'
  Plugin 'haya14busa/incsearch.vim'
  Plugin 'kien/ctrlp.vim'
- Plugin 'terryma/vim-multiple-cursors'
  Plugin 'vim-scripts/vim-auto-save'
  Plugin 'Lokaltog/vim-powerline'
  Plugin 'Shougo/neocomplcache.vim'
  Plugin 'thinca/vim-quickrun'
- Plugin 'MarcWeber/vim-addon-mw-utils'
- Plugin 'tomtom/tlib_vim'
- Plugin 'garbas/vim-snipmate'
-
  Plugin 'easymotion/vim-easymotion'
  Plugin 'nanotech/jellybeans.vim'
  Plugin 'scrooloose/syntastic'
-
-
+ Plugin 'MarcWeber/vim-addon-mw-utils'
+ Plugin 'tomtom/tlib_vim'
+ Plugin 'garbas/vim-snipmate'
  " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -78,9 +70,6 @@ imap df <esc>
 
 set number
 
-"Mulltiply cursors set up
-let g:multi_cursor_next_key='<C-l>'
-
 set tabstop=4
 set shiftwidth=4
 set smarttab
@@ -97,13 +86,6 @@ nmap t <Plug>(easymotion-t2)))
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-"snipmate
-ino <silent> <tab> <c-g>u<c-r>=TriggerSnippet()<cr>
-
-snor <silent> <tab> <esc>i<right><c-r>=TriggerSnippet()<cr>
-ino <silent> <s-tab> <c-r>=BackwardsSnippet()<cr>
-snor <silent> <s-tab> <esc>i<right><c-r>=BackwardsSnippet()<cr>
-
 "Synstasic settings
 let g:syntastic_enable_signs=1
 set statusline+=%#warningmsg#
@@ -116,15 +98,13 @@ let g:syntastic_check_on_open = 1
 map <C-b>sc :SyntasticCheck<CR>
 let g:neocomplcache_enable_at_startup = 1
 set mouse=a
-
+"use this if you need a autocomplete ore C-n
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
+"snipmate
 "maps
 map <C-t> :tabnew <CR>
 map <C-r> :QuickRun <CR>
 map <C-e> :tabclose<CR>
-"Emmet setUp
-let g:user_emmet_expandabbr_key = '<TAB>'
 
 map <D-s> :w <CR>
 map <D-w> :!q<CR>
@@ -144,11 +124,11 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-" arrow key to navigate windows
-noremap <Down> <C-W>j
-noremap <Up> <C-W>k
-noremap <Left> <C-W>h
-noremap <Right> <C-W>l
+"snipmate
+set nocompatible
+filetype on
+filetype plugin on
+imap <C-k> <Plug>snipMateNextOrTrigger
 
 
 set t_Co=256
@@ -159,14 +139,9 @@ set encoding=utf-8 " Кодировка файлов по умолчанию
 set fileencodings=utf8,cp1251 " Возможные кодировки файлов, если файл не в unicode кодировке,
 set nocompatible
 
-"snipmate
-set nocompatible
-filetype on
-filetype plugin on
-let g:snipMate = {}
-let g:snipMate.scope_aliases = {}
-
 "autosave plugin
 let g:auto_save = 1 
 let g:auto_save_no_updatetime = 30
 let g:auto_save_in_insert_mode = 0
+
+
