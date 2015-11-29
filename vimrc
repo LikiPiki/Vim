@@ -27,7 +27,7 @@ call vundle#begin('~/some/path/here')
  Plugin 'MarcWeber/vim-addon-mw-utils'
  Plugin 'tomtom/tlib_vim'
  Plugin 'garbas/vim-snipmate'
- " " plugin from http://vim-scripts.org/vim/scripts.html
+" " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
  Plugin 'git://git.wincent.com/command-t.git'
@@ -68,6 +68,13 @@ map <C-n> :NERDTreeToggle<CR>
 
 imap df <esc>
 
+
+" arrow key to navigate windows
+noremap <Down> <C-W>j
+noremap <Up> <C-W>k
+noremap <Left> <C-W>h
+noremap <Right> <C-W>l>
+
 set number
 
 set tabstop=4
@@ -95,11 +102,9 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-map <C-b>sc :SyntasticCheck<CR>
 let g:neocomplcache_enable_at_startup = 1
+
 set mouse=a
-"use this if you need a autocomplete ore C-n
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "snipmate
 "maps
 map <C-t> :tabnew <CR>
@@ -109,12 +114,6 @@ map <C-e> :tabclose<CR>
 map <D-s> :w <CR>
 map <D-w> :!q<CR>
 
-"Disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
@@ -123,13 +122,6 @@ omap / <Plug>(easymotion-tn)
 " different highlight method and have some other features )
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
-
-"snipmate
-set nocompatible
-filetype on
-filetype plugin on
-imap <C-k> <Plug>snipMateNextOrTrigger
-
 
 set t_Co=256
 
@@ -144,4 +136,8 @@ let g:auto_save = 1
 let g:auto_save_no_updatetime = 30
 let g:auto_save_in_insert_mode = 0
 
+"snipmate
+set nocompatible
+filetype on
+filetype plugin on
 
