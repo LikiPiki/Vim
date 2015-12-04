@@ -1,3 +1,4 @@
+
 filetype on                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -13,20 +14,25 @@ call vundle#begin('~/some/path/here')
 " " plugin on GitHub repo
  Plugin 'tpope/vim-fugitive'
  Plugin 'altercation/vim-colors-solarized'
- Plugin 'tpope/vim-surround'
  Plugin 'scrooloose/nerdtree'
+ Plugin 'godlygeek/tabular'
  Plugin 'haya14busa/incsearch.vim'
  Plugin 'kien/ctrlp.vim'
  Plugin 'vim-scripts/vim-auto-save'
  Plugin 'Lokaltog/vim-powerline'
+ Plugin 'mattn/emmet-vim'
+ Plugin 'hail2u/vim-css3-syntax'
  Plugin 'Shougo/neocomplcache.vim'
+ Plugin 'tpope/vim-surround'
  Plugin 'thinca/vim-quickrun'
  Plugin 'easymotion/vim-easymotion'
  Plugin 'nanotech/jellybeans.vim'
  Plugin 'scrooloose/syntastic'
- Plugin 'MarcWeber/vim-addon-mw-utils'
- Plugin 'tomtom/tlib_vim'
- Plugin 'garbas/vim-snipmate'
+ Plugin 'Shougo/neosnippet'
+ Plugin 'vim-scripts/tComment'
+ Plugin 'Shougo/neosnippet-snippets'
+ Plugin 'tpope/vim-repeat'
+
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
@@ -58,10 +64,11 @@ call vundle#begin('~/some/path/here')
 
 "Colorscheme set up
 syntax enable
-" set background=dark
-" colorscheme solarized
+set background=dark
+colorscheme solarized
 
-color jellybeans
+"set background=dark
+"color jellybeans
 
 "Nerdtree set up
 map <C-n> :NERDTreeToggle<CR>
@@ -82,9 +89,6 @@ set shiftwidth=4
 set smarttab
 set expandtab
 set smartindent
-
-"tmux navigation
-let g:tmux_navigator_no_mappings = 1
 
 " Gif config
 nmap s <Plug>(easymotion-s2)
@@ -136,8 +140,24 @@ let g:auto_save = 1
 let g:auto_save_no_updatetime = 30
 let g:auto_save_in_insert_mode = 0
 
-"snipmate
-set nocompatible
-filetype on
-filetype plugin on
+"auto complete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" Enable snipMate compatibility feature.
+" For conceal markers.
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
 
