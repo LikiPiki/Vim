@@ -26,14 +26,18 @@ call vundle#begin('~/some/path/here')
  Plugin 'tpope/vim-surround'
  Plugin 'thinca/vim-quickrun'
  Plugin 'easymotion/vim-easymotion'
+ Plugin 'wellsjo/wellsokai.vim'
  Plugin 'nanotech/jellybeans.vim'
  Plugin 'scrooloose/syntastic'
- Plugin 'Shougo/neosnippet'
  Plugin 'vim-scripts/tComment'
- Plugin 'Shougo/neosnippet-snippets'
  Plugin 'tpope/vim-repeat'
 
-" " plugin from http://vim-scripts.org/vim/scripts.html
+"QuickInstall Snipmate
+"git clone git://github.com/msanders/snipmate.vim.git
+"cd snipmate.vim
+"cp -R * ~/.vim
+
+"" plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
  Plugin 'git://git.wincent.com/command-t.git'
@@ -142,22 +146,3 @@ let g:auto_save_in_insert_mode = 0
 
 "auto complete
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-" Enable snipMate compatibility feature.
-" For conceal markers.
-if has('conceal')
-    set conceallevel=2 concealcursor=niv
-endif
-
