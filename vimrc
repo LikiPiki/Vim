@@ -1,4 +1,3 @@
-
 filetype on                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -22,6 +21,7 @@ call vundle#begin('~/some/path/here')
  Plugin 'Lokaltog/vim-powerline'
  Plugin 'mattn/emmet-vim'
  Plugin 'hail2u/vim-css3-syntax'
+ Plugin 'msanders/snipmate.vim'
  Plugin 'Shougo/neocomplcache.vim'
  Plugin 'tpope/vim-surround'
  Plugin 'thinca/vim-quickrun'
@@ -31,11 +31,6 @@ call vundle#begin('~/some/path/here')
  Plugin 'scrooloose/syntastic'
  Plugin 'vim-scripts/tComment'
  Plugin 'tpope/vim-repeat'
-
-"QuickInstall Snipmate
-"git clone git://github.com/msanders/snipmate.vim.git
-"cd snipmate.vim
-"cp -R * ~/.vim
 
 "" plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -144,5 +139,8 @@ let g:auto_save = 1
 let g:auto_save_no_updatetime = 30
 let g:auto_save_in_insert_mode = 0
 
-"auto complete
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"snipmate setup
+set nocompatible
+filetype on
+filetype plugin on
+
