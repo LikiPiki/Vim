@@ -16,11 +16,12 @@ call vundle#begin('~/some/path/here')
  Plugin 'scrooloose/nerdtree'
  Plugin 'godlygeek/tabular'
  Plugin 'haya14busa/incsearch.vim'
+ Plugin 'morhetz/gruvbox'
  Plugin 'kien/ctrlp.vim'
- Plugin 'vim-scripts/vim-auto-save'
  Plugin 'Lokaltog/vim-powerline'
  Plugin 'mattn/emmet-vim'
  Plugin 'hail2u/vim-css3-syntax'
+ Plugin 'sjl/badwolf'
  Plugin 'msanders/snipmate.vim'
  Plugin 'Shougo/neocomplcache.vim'
  Plugin 'tpope/vim-surround'
@@ -31,6 +32,7 @@ call vundle#begin('~/some/path/here')
  Plugin 'scrooloose/syntastic'
  Plugin 'vim-scripts/tComment'
  Plugin 'tpope/vim-repeat'
+ Plugin 'klen/python-mode'
 
 "" plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -64,9 +66,7 @@ call vundle#begin('~/some/path/here')
 "Colorscheme set up
 syntax enable
 set background=dark
-colorscheme solarized
-
-"set background=dark
+colorscheme solarized 
 "color jellybeans
 
 "Nerdtree set up
@@ -114,7 +114,7 @@ map <C-t> :tabnew <CR>
 map <C-r> :QuickRun <CR>
 map <C-e> :tabclose<CR>
 
-map <D-s> :w <CR>
+map <F2> :w <CR>
 map <D-w> :!q<CR>
 
 map  / <Plug>(easymotion-sn)
@@ -133,11 +133,6 @@ set noswapfile
 set encoding=utf-8 " Кодировка файлов по умолчанию
 set fileencodings=utf8,cp1251 " Возможные кодировки файлов, если файл не в unicode кодировке,
 set nocompatible
-
-"autosave plugin
-let g:auto_save = 1 
-let g:auto_save_no_updatetime = 30
-let g:auto_save_in_insert_mode = 0
 
 "snipmate setup
 set nocompatible
