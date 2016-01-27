@@ -22,7 +22,7 @@ call vundle#begin('~/some/path/here')
  Plugin 'mattn/emmet-vim'
  Plugin 'hail2u/vim-css3-syntax'
  Plugin 'sjl/badwolf'
- Plugin 'msanders/snipmate.vim'
+ Plugin 'msanders/snipmate.vim’A
  Plugin 'Shougo/neocomplcache.vim'
  Plugin 'tpope/vim-surround'
  Plugin 'thinca/vim-quickrun'
@@ -65,15 +65,12 @@ call vundle#begin('~/some/path/here')
 
 "Colorscheme set up
 syntax enable
-set background=dark
-colorscheme solarized 
-"color jellybeans
+color jellybeans
 
 "Nerdtree set up
 map <C-n> :NERDTreeToggle<CR>
 
 imap df <esc>
-
 
 " arrow key to navigate windows
 noremap <Down> <C-W>j
@@ -107,15 +104,68 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:neocomplcache_enable_at_startup = 1
 
-set mouse=a
+
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Enable heavy features.
+" Use camel case completion.
+"let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+"let g:neocomplcache_enable_underbar_completion = 1
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 "snipmate
+"imap <C-n> <Plug>snipMateNextOrTrigger
+set mouse=a
 "maps
 map <C-t> :tabnew <CR>
 map <C-r> :QuickRun <CR>
 map <C-e> :tabclose<CR>
 
-map <F2> :w <CR>
-map <D-w> :!q<CR>
+" Map ctrl-movement keys to window switching
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+
+" Toggle paste mode
+nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
+imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
@@ -138,4 +188,3 @@ set nocompatible
 set nocompatible
 filetype on
 filetype plugin on
-
