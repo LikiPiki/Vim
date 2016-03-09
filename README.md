@@ -1,5 +1,5 @@
 # Vim config by Saby
-<img src="http://i.imgur.com/1vbjRdh.png"/>
+<img src="http://i.imgur.com/NyCquHj.png"/>
 
 #How to install
 ```
