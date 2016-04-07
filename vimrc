@@ -11,9 +11,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Kjjj:eep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -29,7 +30,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 imap df <esc>
 let mapleader=","
-set colorcolumn=80
 
 set invlist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
@@ -60,6 +60,8 @@ set tabstop=4
 set shiftwidth=4
 set smarttab
 set smartindent
+set encoding=utf8
+
 
 
 "saby plugins
@@ -86,13 +88,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" Plugin 'Shougo/neocomplete.vim'
-" let g:neocomplete#enable_at_startup = 1
+Plugin 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
 
 Plugin 'Shougo/neocomplcache.vim'
 
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'easymotion/vim-easymotion'
@@ -100,25 +100,20 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/tComment'
 Plugin 'tpope/vim-repeat'
 Plugin 'aperezdc/vim-template'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'matze/vim-move'
-Plugin 'unblevable/quick-scope'
-Plugin 'godlygeek/tabular'
-Plugin 'vim-scripts/mru.vim'
-"web development
-Plugin 'digitaltoad/vim-pug' "jade support
 Plugin 'pangloss/vim-javascript'
-Plugin 'mattn/emmet-vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'wavded/vim-stylus'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kien/ctrlp.vim'
+Plugin 'unblevable/quick-scope'
+Plugin 'ervandew/supertab'
 
-" Ack settings
-let g:ackprg = "ag --vimgrep"
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" Trigger a highlight only when pressing f and F.
+let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+let g:qs_first_occurrence_highlight_color = 155       " terminal vim
 
-let g:clang_library_path='/usr/lib/libclang.so'
-
-"MRU hotkey
-map <C-m> :MRU<CR>
+let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+let g:qs_second_occurrence_highlight_color = 81         " terminal vim
 
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -130,20 +125,22 @@ let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
 let g:qs_first_occurrence_highlight_color = 155       " terminal vim
 
 let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81
+let g:qs_second_occurrence_highlight_color = 81         " terminal vim
 
-"vim-move settings
-vmap <M-j> <Plug>MoveBlockDown
-vmap <M-k> <Plug>MoveBlockUp
+let g:javascript_conceal_function   = "ƒ"
+let g:javascript_conceal_null       = "ø"
+let g:javascript_conceal_this       = "@"
+let g:javascript_conceal_return     = "⇚"
+let g:javascript_conceal_undefined  = "¿"
+let g:javascript_conceal_NaN        = "ℕ"
+let g:javascript_conceal_prototype  = "¶"
+let g:javascript_conceal_static     = "•"
+let g:javascript_conceal_super      = "Ω"
 
-
-let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
-
 "Synstasic settings
-
 let g:syntastic_enable_signs=1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -153,6 +150,48 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:neocomplcache_enable_at_startup = 1
+
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+
+" Автоматический insert mode
+let g:unite_enable_start_insert = 1
+
+" Отображаем Unite в нижней части экрана
+let g:unite_split_rule = "botright"
+
+" Отключаем замену статус строки
+let g:unite_force_overwrite_statusline = 0
+
+" Размер окна Unite
+let g:unite_winheight = 10
+let g:unite_candidate_icon="▷"
+
+let g:unite_source_menu_menus = {}
+let g:unite_source_menu_menus.mymenu = {
+            \     'description' : 'Saby VIM Unite',
+            \ }
+
+let g:unite_source_menu_menus.mymenu.candidates = {
+            \   '▷ tag'      : 'Unite tag',
+            \   '▷ file'      : 'Unite file',
+            \   '▷ fuzzy finder'      : 'Unite file_rec',
+            \   '▷ fuzzy in file'      : 'Unite file_rec/async',
+            \   '▷ find'      : 'Unite find',
+            \   '▷ list buffers'      : ':Unite -quick-match buffer',
+            \   '▷ grep'      : 'Unite grep',
+            \   '▷ register'      : 'Unite register',
+            \   '▷ bookmark'      : 'Unite bookmark',
+            \   '▷ output'      : 'Unite output',
+            \ }
+function g:unite_source_menu_menus.mymenu.map(key, value)
+    return {
+            \       'word' : a:key, 'kind' : 'command',
+            \       'action__command' : a:value,
+            \ }
+endfunction
+
+map <C-x> :Unite menu:mymenu<CR>
 
 set mouse=a
 "maps
@@ -174,7 +213,7 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
 set backspace=indent,eol,start
-:set backspace=2  "compatible with version 5.4 and earlierdfdf
+:set backspace=2  "compatible with version 5.4 and earlier
 
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
@@ -215,4 +254,3 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 syntax on
-
