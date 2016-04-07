@@ -19,17 +19,20 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
+"need cd .vim and rake make !!!
 " git repos on your local machine (i.e. when working on your own plugin)
 Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-
 map <C-n> :NERDTreeToggle<CR>
 
 imap df <esc>
 let mapleader=","
+map <space> :
+
+map <F5> :SyntasticToggleMode<CR>
 
 set invlist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
@@ -88,12 +91,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 
 Plugin 'Shougo/neocomplcache.vim'
 
 Plugin 'scrooloose/nerdtree'
+
+Plugin 'vim-scripts/LustyExplorer'
+
 Plugin 'tpope/vim-surround'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/syntastic'
@@ -105,6 +111,20 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
 Plugin 'unblevable/quick-scope'
 Plugin 'ervandew/supertab'
+
+"Python
+Plugin 'klen/python-mode'
+
+"Web development
+Plugin 'vim-scripts/CSSMinister'
+Plugin 'vim-scripts/Gundo'
+
+" for c++ development
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'vim-scripts/c.vim'
+Plugin 'mipmip/vim-minimap'
+Plugin 'Raimondi/delimitMate'
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Trigger a highlight only when pressing f and F.
@@ -193,6 +213,42 @@ endfunction
 
 map <C-x> :Unite menu:mymenu<CR>
 
+let g:unite_source_menu_menus.git = {
+    \ 'description' : '            gestionar repositorios git
+        \                            ⌘ [espacio]g',
+    \}
+let g:unite_source_menu_menus.git.command_candidates = [
+    \['▷ tig                                                        ⌘ ,gt',
+        \'normal ,gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+        \'Gstatus'],
+    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+        \'Gdiff'],
+    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+        \'Gcommit'],
+    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+        \'exe "silent Glog | Unite quickfix"'],
+    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+        \'Gblame'],
+    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+        \'Gwrite'],
+    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+        \'Gread'],
+    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+        \'Gremove'],
+    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+        \'exe "Gmove " input("destino: ")'],
+    \['▷ git push         (Fugitive, salida por buffer)             ⌘ ,gp',
+        \'Git! push'],
+    \['▷ git pull         (Fugitive, salida por buffer)             ⌘ ,gP',
+        \'Git! pull'],
+    \['▷ git prompt       (Fugitive, salida por buffer)             ⌘ ,gi',
+        \'exe "Git! " input("comando git: ")'],
+    \['▷ git cd           (Fugitive)',
+        \'Gcd'],
+    \]
+nnoremap <leader>g :Unite -silent -start-insert menu:git<CR>
+
 set mouse=a
 "maps
 map <C-t> :tabnew <CR>
@@ -231,13 +287,10 @@ set fileencodings=utf8,cp1251 " Возможные кодировки файло
 set nocompatible
 
 "tabs settings
-map <F5> :tabnew<CR>
-map <f2> :w<CR>
 map <f3> :zM<CR>
 map <f4> :zR<CR>
 map [ gT<CR>
 map ] gt<CR>
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
