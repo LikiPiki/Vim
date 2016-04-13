@@ -11,15 +11,18 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
-" Kjjj:eep Plugin commands between vundle#begin/end.
+" Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'mattn/gist-vim'
+Plugin 'mattn/webapi-vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/gv.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
 " Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-"need cd .vim and rake make !!!
+"need cd .vim and rake make !!
 " git repos on your local machine (i.e. when working on your own plugin)
 Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -29,10 +32,17 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 map <C-n> :NERDTreeToggle<CR>
 
 imap df <esc>
-let mapleader=","
+let mapleader=" "
 map <space> :
+map <leader>; :
+map <leader>n :NERDTreeToggle<CR>
+map <leader>s :Gstatus<CR>
+map <leader>c :Gcommit<CR>
+map <leader>u :UndotreeToggle<CR>
+vmap <leader>t :Tabularize /
 
 map <F5> :SyntasticToggleMode<CR>
+map <F6> :Gist<CR>
 
 set invlist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
@@ -70,6 +80,8 @@ set encoding=utf8
 "saby plugins
 "coloshemes
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'AlessandroYorba/Alduin'
+Plugin 'AlessandroYorba/Sierra'
 color base16-eighties
 set background=dark
 
@@ -78,6 +90,7 @@ Plugin 'Lokaltog/vim-powerline'
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
+Plugin 'JazzCore/neocomplcache-ultisnips'
 
 " Snippets are separated from the engine. Snippets for ultisnips
 Plugin 'honza/vim-snippets'
@@ -97,8 +110,11 @@ let g:neocomplete#enable_at_startup = 1
 Plugin 'Shougo/neocomplcache.vim'
 
 Plugin 'scrooloose/nerdtree'
-
-Plugin 'vim-scripts/LustyExplorer'
+Plugin 'tpope/vim-markdown'
+Plugin 'godlygeek/tabular'
+Plugin 'rhysd/clever-f.vim'
+let g:clever_f_across_no_line=1
+Plugin 'szw/vim-tags'
 
 Plugin 'tpope/vim-surround'
 Plugin 'easymotion/vim-easymotion'
@@ -109,7 +125,6 @@ Plugin 'aperezdc/vim-template'
 Plugin 'pangloss/vim-javascript'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kien/ctrlp.vim'
-Plugin 'unblevable/quick-scope'
 Plugin 'ervandew/supertab'
 
 "Python
@@ -118,34 +133,18 @@ Plugin 'klen/python-mode'
 "Web development
 Plugin 'vim-scripts/CSSMinister'
 Plugin 'vim-scripts/Gundo'
-
+Plugin 'tmhedberg/matchit'
+Plugin 'itspriddle/vim-jquery'
 " for c++ development
-Plugin 'Rip-Rip/clang_complete'
+" Plugin 'Rip-Rip/clang_complete'
 Plugin 'vim-scripts/c.vim'
 Plugin 'mipmip/vim-minimap'
 Plugin 'Raimondi/delimitMate'
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+Plugin 'mbbill/undotree'
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
 
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" Trigger a highlight only when pressing f and F.
-let g:qs_highlight_on_keys = ['f', 'F']
-let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-let g:qs_first_occurrence_highlight_color = 155       " terminal vim
-
-let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81         " terminal vim
-
-" Trigger a highlight in the appropriate direction when pressing these keys:
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" Trigger a highlight only when pressing f and F.
-let g:qs_highlight_on_keys = ['f', 'F']
-
-let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
-let g:qs_first_occurrence_highlight_color = 155       " terminal vim
-
-let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
-let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+" let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 
 let g:javascript_conceal_function   = "ƒ"
 let g:javascript_conceal_null       = "ø"
@@ -267,6 +266,8 @@ imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
 
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+nmap s <Plug>(easymotion-s2)
+
 
 set backspace=indent,eol,start
 :set backspace=2  "compatible with version 5.4 and earlier
