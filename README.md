@@ -1,5 +1,5 @@
 # Vim config by Saby
-<img src="http://i.imgur.com/NyCquHj.png"/>
+<img src="https://raw.githubusercontent.com/LikiPiki/Vim/master/screenshot.png"/>
 
 #How to install
 ```
