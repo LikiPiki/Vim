@@ -3,7 +3,7 @@
 
 #How to install
 ```
-curl -L https://goo.gl/6kl8qz | bash
+curl -L https://goo.gl/s0O0wf | bash
 ```
 Or download this script and run installVim.sh (only for OSX)
 ###Lest go CODE.......
