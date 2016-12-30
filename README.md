@@ -1,6 +1,11 @@
 # Vim config by Saby
 <img src="https://raw.githubusercontent.com/LikiPiki/Vim/master/screenshot.png"/>
 
+And new neovim setup!
+Async plugins:
+1) Neomake
+2) Deoplete + neosnippets
+
 #How to install
 ```
 curl -L https://goo.gl/s0O0wf | bash
