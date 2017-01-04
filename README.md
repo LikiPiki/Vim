@@ -6,15 +6,8 @@ Async plugins:
 1) Neomake
 2) Deoplete + neosnippets
 
-#How to install
 ```
 curl -L https://goo.gl/s0O0wf | bash
-```
-
-#How to install with script setup.py
-
-```
-bash setup.sh
 ```
 
 Or download this script and run installVim.sh (only for OSX)
