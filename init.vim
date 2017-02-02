@@ -4,6 +4,7 @@
 " 	https://raw.githubusercjntent.com/junegunn/vim-plug/master/plug.vim
 " 2. Copy this .vimrc to your .vimrc
 " 3. Go to vim and :PlugInstall
+
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/gist-vim'
@@ -11,7 +12,8 @@ Plug 'mattn/webapi-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'kien/tabman.vim'
-Plug 'mhinz/vim-grepper'
+" Plug 'mhinz/vim-grepper'
+Plug 'mileszs/ack.vim'
 
 "WhiteSpace
 " Plug 'bronson/vim-trailing-whitespace'
@@ -20,8 +22,9 @@ Plug 'vim-ctrlspace/vim-ctrlspace'
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
 set hidden
+
 map <C-x> :CtrlSpace<CR>
-Plug 'szw/vim-maximizer'
+Plug 'Chiel92/vim-autoformat'
 " set showtabline=0
 Plug 'L9'
 " Plug 'wincent/command-t', {
@@ -35,6 +38,10 @@ Plug 'L9'
 Plug 'wincent/scalpel'
 " set listchars=tab:\|\ 
 set list
+
+"for neovim unmap
+nmap <BS> <C-W>h
+
 
 " Plug 'wincent/terminus'
 " let g:TerminusInsertCursorShape=0
@@ -55,7 +62,7 @@ map <leader>fs :w<CR>
 map <leader>js :CtrlPCdnJs<CR>
 map <leader>o :CtrlPBuffer<CR>
 map <leader>h :MBEToggle<CR>
-map <leader>g :Grepper<CR>
+" map <leader>g :Grepper<CR>
 map <leader>w :FixWhitespace<CR>
 map <leader>m :MaximizerToggle<CR>
 map <leader>l :lopen<CR>
@@ -67,13 +74,13 @@ map <C-p> :CtrlPBuffer<CR>
 
 vmap <leader>t :Tabularize /
 
-" map <C-x>2 :sp<CR>
-" map <C-x>3 :vsp<CR>
-
+noremap <F3> :Autoformat<CR>
 map <F5> :SyntasticToggleMode<CR>
 map <F6> :Gist<CR>
 map <F7> :AirlineToggleWhitespace<CR>
+nmap <F8> :TagbarToggle<CR>
 map <F9> :set list!<CR>
+
 
 " set invlist
 " set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
@@ -82,11 +89,7 @@ map <F9> :set list!<CR>
 
 " Tab control
 set completeopt+=longest
-
-noremap <Down> <C-W>j
-noremap <Up> <C-W>k
-noremap <Left> <C-W>h
-noremap <Right> <C-W>l>
+set cursorline
 
 set number
 set colorcolumn=80
@@ -121,11 +124,13 @@ set background=dark
 "let g:Powerline_symbols = 'fancy'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 let g:airline_powerline_fonts = 1
+let g:airline_theme='oceanicnext'
+
 " let g:airline_left_sep=''
 " let g:airline_right_sep=''
-let g:airline#extensions#tabline#enabled = 1                                                                    
+let g:airline#extensions#tabline#enabled = 1
 " CTRLSPACE
 let g:airline_exclude_preview = 1
 let g:CtrlSpaceUseTabline = 1 
@@ -149,6 +154,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'LikiPiki/Snips'
 Plug 'honza/vim-snippets'
 
+" add neosnippet in html files setup
+
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -162,13 +169,6 @@ let g:neosnippet#scope_aliases['python'] = 'python,django'
 
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/Snips/NeoSnippets'
-"
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<c-k>"
-" let g:UltiSnipsJumpForwardTrigger="<c-k>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-l>"
-" let g:UltiSnipsListSnippets = "<c-l>"
-" let g:UltiSnipsSnippetsDir = "~/.vim/plugged/Snips/UltiSnips"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -176,7 +176,6 @@ let g:UltiSnipsEditSplit="vertical"
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neco-vim'
 let g:deoplete#enable_at_startup = 1
-" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<c-k>"
 
 Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
 " Plug 'tpope/vim-markdown', { 'for':  'markdown'}
@@ -203,10 +202,9 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Plug 'ervandew/supertab'
 
 "tmux
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
 
 "Python
 " Plug 'klen/python-mode', {'for' : 'python'}
@@ -251,10 +249,13 @@ Plug 'Raimondi/delimitMate'
 " Folding
 " Plug 'Konfekt/FastFold'
 
-" Plug 'mbbill/undotree'
-" Plug 'majutsushi/tagbar'
+" Vim Go
+Plug 'fatih/vim-go'
+let g:go_bin_path = "$HOME/go"
 
-" nmap <F8> :TagbarToggle<CR>
+" Plug 'mbbill/undotree'
+Plug 'majutsushi/tagbar'
+
 
 let g:multi_cursor_next_key='<C-d>'
 let g:multi_cursor_skip_key='<C-x>'
@@ -311,9 +312,21 @@ map <f4> :zR<CR>
 map [ gT<CR>
 map ] gt<CR>
 
+noremap <Down> <C-W>j
+noremap <Up> <C-W>k
+noremap <Left> <C-W>h
+noremap <Right> <C-W>l>
+
 " Add plugins to &runtimepath
 call plug#end()
 
 syntax on
+" Or if you have Neovim >= 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
 
-color gruvbox
+" Theme
+syntax enable
+colorscheme OceanicNext
+
