@@ -20,17 +20,21 @@ noremap ; :
 map <leader>; :
 map <leader>fs :w<CR>
 
+
 inoremap <expr><C-h>  neocomplcache#close_popup()
 
 map <F6> :Gist<CR>
 map <F7> :AirlineToggleWhitespace<CR>
 nmap <F8> :TagbarToggle<CR>
 
+
+"neovim only style
+set termguicolors
+
 " --- Language support --- 
 Plug 'kchmck/vim-coffee-script'
 Plug 'elixir-lang/vim-elixir'
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
-Plug 'elixir-lang/vim-elixir'
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
@@ -41,11 +45,16 @@ Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " --- Tools Plugins ---
+"  git suppert
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-repeat'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'wincent/scalpel'
+nmap <Leader>e <Plug>(Scalpel)
 
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_across_no_line=1
@@ -93,6 +102,8 @@ autocmd! BufWritePost * Neomake
 " --- Color Themes ---
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
+Plug 'mhartington/oceanic-next'
+Plug 'vim-scripts/Sorcerer'
 
 " --- AIRLINE ---
 Plug 'vim-airline/vim-airline'
