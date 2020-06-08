@@ -10,30 +10,33 @@
 call plug#begin('~/.vim/plugged')
 
 " --- KeyMap ---
+let mapleader=","
 map <C-n> :NERDTreeToggle<CR>
-map <C-p> :CtrlPBuffer<CR>
 
 imap df <esc>
-let mapleader=" "
 map <space> :
 noremap ; :
-map <leader>; :
 map <leader>fs :w<CR>
+map <leader>fs :terminal<CR>
+map <leader>t :terminal<CR>
+map <leader>c :Clap<CR>
+map <leader>b :Clap buffers<CR>
+map <C-p> :Clap Files<CR>
 
 
 inoremap <expr><C-h>  neocomplcache#close_popup()
+map <C-n> :NERDTreeToggle<CR>
 
 map <F6> :Gist<CR>
 map <F7> :AirlineToggleWhitespace<CR>
 nmap <F8> :TagbarToggle<CR>
 
-
-"neovim only style
 set termguicolors
 
+" testing wakatime	
+Plug 'wakatime/vim-wakatime'
+
 " --- Language support --- 
-Plug 'kchmck/vim-coffee-script'
-Plug 'elixir-lang/vim-elixir'
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
@@ -41,18 +44,25 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+" Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+" Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
-" --- Tools Plugins ---
+"--- Tools Plugins ---
 "  git suppert
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+
 Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
+let NERDTreeIgnore = ['\.pyc$']
+
 Plug 'tpope/vim-repeat'
-Plug 'ctrlpvim/ctrlp.vim'
+
+" Plug 'liuchengxu/vim-clap'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+
 Plug 'wincent/scalpel'
 nmap <Leader>e <Plug>(Scalpel)
 
@@ -64,20 +74,22 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 nmap s <Plug>(easymotion-s2)
 
+Plug 'matze/vim-move'
+
 Plug 'vim-scripts/tComment'
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_next_key='<C-d>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+" Plug 'terryma/vim-multiple-cursors'
+" let g:multi_cursor_next_key='<C-d>'
+" let g:multi_cursor_skip_key='<C-x>'
+" let g:multi_cursor_quit_key='<Esc>'
 
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
 Plug 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
 " ----- Editing code plugins ----
 " -- Snippets and autocomplete --
-
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'LikiPiki/Snips'
@@ -95,27 +107,28 @@ set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
 
 
-" NEOMAKE
-Plug 'neomake/neomake'
-autocmd! BufWritePost * Neomake
+" Syntax checking
+Plug 'dense-analysis/ale'
 
 " --- Color Themes ---
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mhartington/oceanic-next'
-Plug 'vim-scripts/Sorcerer'
+Plug 'rakr/vim-one'
 
 " --- AIRLINE ---
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+Plug 'edkolev/tmuxline.vim'
+
+let g:airline_powerline_fonts = 0
+let g:airline_theme='one'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_exclude_preview = 1
 let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#right_sep = ' '
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)"
@@ -148,11 +161,13 @@ noremap <Up> <C-W>k
 noremap <Left> <C-W>h
 noremap <Right> <C-W>l>
 
+set inccommand=nosplit
 set nobackup
 set noswapfile
-set encoding=utf-8 " Кодировка файлов по умолчанию
-set fileencodings=utf8,cp1251 " Возможные кодировки файлов, если файл не в unicode кодировке,
+set encoding=utf-8
+set fileencodings=utf8,cp1251
 set nocompatible
+set diffopt+=vertical
 set laststatus=2
 set encoding=utf8
 
@@ -160,5 +175,13 @@ set encoding=utf8
 call plug#end()
 
 syntax on
-set background=dark
-color gruvbox
+" set background=dark
+" color gruvbox
+color one
+
+" tabs setting
+autocmd Filetype css setlocal tabstop=2
+autocmd Filetype html setlocal tabstop=2
+autocmd Filetype htmldjango setlocal tabstop=2
+
+set mouse=a
