@@ -1,4 +1,4 @@
-" This .vimrc by Saby use Vim-Plug -> github.com/junegunn/vim-plug
+" This init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
 " 1. Install Vim - Plug -> curl -fL
 " ~/.vim/autoload/plug.vim --create-dirs \
 " 	https://raw.githubusercjntent.com/junegunn/vim-plug/master/plug.vim
@@ -11,18 +11,22 @@ call plug#begin('~/.vim/plugged')
 
 " --- KeyMap ---
 let mapleader=","
+let maplocalleader = " "
+
 map <C-n> :NERDTreeToggle<CR>
 
+" dont show status
+set noshowmode
+
 imap df <esc>
-map <space> :
+" map <space> :
 noremap ; :
 map <leader>fs :w<CR>
 map <leader>fs :terminal<CR>
 map <leader>t :terminal<CR>
 map <leader>c :Clap<CR>
 map <leader>b :Clap buffers<CR>
-map <C-p> :Clap Files<CR>
-
+map <C-p> :Clap files<CR>
 
 inoremap <expr><C-h>  neocomplcache#close_popup()
 map <C-n> :NERDTreeToggle<CR>
@@ -40,11 +44,32 @@ Plug 'wakatime/vim-wakatime'
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+augroup GOlang
+    au!
+    autocmd FileType go
+        \  nmap <buffer> <LocalLeader>r   <Plug>(go-run)
+        \| nmap <buffer> <LocalLeader>R   <Plug>(go-rename)
+        \| nmap <buffer> <LocalLeader>b   <Plug>(go-build)
+        \| nmap <buffer> <LocalLeader>t   <Plug>(go-test)
+        \| nmap <buffer> <LocalLeader>c   <Plug>(go-coverage)
+        \| nmap <buffer> <LocalLeader>gv  <Plug>(go-doc-vertical)
+		\| nmap <buffer> <LocalLeader>gd  <Plug>(go-doc)
+        \| nmap <buffer> <LocalLeader>gg  <Plug>(go-def)
+        \| nmap <buffer> <LocalLeader>gp  <Plug>(go-def-pop)
+        \| nmap <buffer> <LocalLeader>s   <Plug>(go-implements)
+        \| nmap <buffer> <LocalLeader>i   <Plug>(go-info)
+        \| nmap <buffer> <LocalLeader>I   <Plug>(go-imports)
+        \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
+augroup END
 
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+augroup GOlang
+    au!
+    autocmd FileType go
+        \  nmap <buffer> <LocalLeader>b   :make
+augroup END
 Plug 'zchee/deoplete-jedi'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-" Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+
+Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 " Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 "--- Tools Plugins ---
@@ -63,9 +88,6 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
-Plug 'wincent/scalpel'
-nmap <Leader>e <Plug>(Scalpel)
-
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_across_no_line=1
 
@@ -73,6 +95,9 @@ Plug 'easymotion/vim-easymotion'
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 nmap s <Plug>(easymotion-s2)
+vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 
 Plug 'matze/vim-move'
 
@@ -88,29 +113,73 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
-" ----- Editing code plugins ----
-" -- Snippets and autocomplete --
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'LikiPiki/Snips'
-Plug 'honza/vim-snippets'
-map <leader>u :NeoSnippetEdit -split -vertical<CR>
-let g:neosnippet#scope_aliases = {}
-let g:neosnippet#scope_aliases['python'] = 'python,django'
 
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets, ~/.vim/plugged/Snips/NeoSnippets'
 
-" --- Autocomplete ---
+"--- Autocomplete ---
 Plug 'Shougo/deoplete.nvim'
 set completeopt-=preview
 let g:deoplete#enable_at_startup = 1
 
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
-" Syntax checking
+"--- Snippets
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/Snips/UltiSnips"]
+let g:UltiSnipsEditSplit="vertical"
+map <leader>u :UltiSnipsEdit<CR>
+
+let g:ulti_expand_res = 0
+autocmd! User UltiSnipsEnterFirstSnippet
+autocmd User UltiSnipsEnterFirstSnippet call UltiSnipsSnippetStart()
+autocmd! User UltiSnipsExitLastSnippet
+autocmd User UltiSnipsExitLastSnippet call UltiSnipsSnippetEnd()
+
+function! UltiSnipsSnippetStart()
+	let g:ulti_expand_res = 1
+endfunction
+
+function! UltiSnipsSnippetEnd()
+	let g:ulti_expand_res = 0
+	echo "Inside snippet"
+endfunction
+
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Custom completition like SUPERTab (like VSCode snippets works)
+function! g:UltiSnips_Complete()
+	if g:ulti_expand_res == 0
+		call UltiSnips#ExpandSnippet()
+		if g:ulti_expand_res == 0
+			if pumvisible()
+				return "\<C-n>"
+			else
+			   return "\<TAB>"
+			endif
+		endif
+	else
+		call UltiSnips#JumpForwards()
+	endif
+	return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+Plug 'honza/vim-snippets'
+Plug 'LikiPiki/Snips'
+" Change ultisnips directory to my snippets dir
+
+"--- Syntax checking ---
 Plug 'dense-analysis/ale'
+nmap <silent> <A-l> <Plug>(ale_previous_wrap)
+nmap <silent> <A-h> <Plug>(ale_next_wrap)
 
-" --- Color Themes ---
+Plug 'lervag/vimtex'
+autocmd Filetype tex setl updatetime=1
+let g:vimtex_quickfix_mode=0
+let g:tex_flavor = "latex"
+
+"--- Color Themes ---
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mhartington/oceanic-next'
@@ -129,15 +198,13 @@ let g:airline_exclude_preview = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-let g:deoplete#enable_at_startup = 1
+let g:airline#extensions#ale#enabled = 1
+let airline#extensions#ale#error_symbol = 'E:'
+let airline#extensions#ale#warning_symbol = 'W:'
+let g:airline#extensions#whitespace#enabled = 0
+let airline#extensions#ale#show_line_numbers = 1
 
+map <leader>w :AirlineToggleWhitespace<CR>
 
 " --- Basic setup ---
 set cursorline
@@ -171,8 +238,21 @@ set diffopt+=vertical
 set laststatus=2
 set encoding=utf8
 
+"--- Code folding ---
+set foldmethod=indent
+set foldlevel=12
+autocmd BufWinLeave *.* mkview 
+autocmd BufWinEnter *.* silent loadview
+
+" show first row for ALE
+set signcolumn=yes
+
 " --- Vim-Plug END ---
 call plug#end()
+
+" You must call deoplete#custom#source() after plug#end().
+" Because, plug#end() add plugins runtimepath.
+call deoplete#custom#source('ultisnips', 'rank', 9999)
 
 syntax on
 " set background=dark
