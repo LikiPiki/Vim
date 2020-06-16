@@ -24,8 +24,8 @@ noremap ; :
 map <leader>fs :w<CR>
 map <leader>fs :terminal<CR>
 map <leader>t :terminal<CR>
-map <leader>c :Clap<CR>
-map <leader>b :Clap buffers<CR>
+" map <leader>c :Clap<CR>
+" map <leader>b :Clap buffers<CR>
 map <C-p> :Clap files<CR>
 
 inoremap <expr><C-h>  neocomplcache#close_popup()
@@ -82,8 +82,27 @@ let NERDTreeIgnore = ['\.pyc$']
 
 Plug 'tpope/vim-repeat'
 
-" Plug 'liuchengxu/vim-clap'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+" --- FZF Keybindings ---
+map <C-p> :Files<CR>
+map <leader>b :Buffers<CR>
+nnoremap <leader>g :Rg<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>m :Marks<CR>
+nnoremap <leader>f :Lines<CR>
+nnoremap <leader>c :Commands<CR>
+
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
@@ -98,6 +117,7 @@ nmap s <Plug>(easymotion-s2)
 vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+Plug 'AndrewRadev/splitjoin.vim'
 
 Plug 'matze/vim-move'
 
@@ -206,46 +226,8 @@ let airline#extensions#ale#show_line_numbers = 1
 
 map <leader>w :AirlineToggleWhitespace<CR>
 
-" --- Basic setup ---
-set cursorline
-
-set number
-set colorcolumn=80
-
-set tabstop=4
-set shiftwidth=4
-set smarttab
-set smartindent
-set encoding=utf8
-set noet
-map <C-k> <C-w><Up>
-map <C-j> <C-w><Down>
-map <C-l> <C-w><Right>
-map <C-h> <C-w><Left>
-
-noremap <Down> <C-W>j
-noremap <Up> <C-W>k
-noremap <Left> <C-W>h
-noremap <Right> <C-W>l>
-
-set inccommand=nosplit
-set nobackup
-set noswapfile
-set encoding=utf-8
-set fileencodings=utf8,cp1251
-set nocompatible
-set diffopt+=vertical
-set laststatus=2
-set encoding=utf8
-
-"--- Code folding ---
-set foldmethod=indent
-set foldlevel=12
-autocmd BufWinLeave *.* mkview 
-autocmd BufWinEnter *.* silent loadview
-
-" show first row for ALE
-set signcolumn=yes
+" --- Default simple configuration ---
+source $HOME/.config/nvim/settings.vim
 
 " --- Vim-Plug END ---
 call plug#end()
@@ -254,14 +236,5 @@ call plug#end()
 " Because, plug#end() add plugins runtimepath.
 call deoplete#custom#source('ultisnips', 'rank', 9999)
 
-syntax on
-" set background=dark
-" color gruvbox
 color one
 
-" tabs setting
-autocmd Filetype css setlocal tabstop=2
-autocmd Filetype html setlocal tabstop=2
-autocmd Filetype htmldjango setlocal tabstop=2
-
-set mouse=a
