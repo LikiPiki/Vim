@@ -1,0 +1,58 @@
+snippet simpledoc "The simple latex document"
+\documentclass[12pt]{article}
+\usepackage[english, russian]{babel}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+
+\begin{document}
+	$0
+\end{document}
+endsnippet
+
+snippet // "frac{}"
+\frac{${1:${VISUAL}}}{$2}$0
+endsnippet
+
+snippet ^ "Power visual"
+{${1:${VISUAL}}}^{$2}$0
+endsnippet
+
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
+endsnippet
+
+snippet use "\usepackage"
+\usepackage${2:[${1:params}]}{${3:package}}$0
+endsnippet
+
+snippet pack_listing "Include lslisting package"
+\usepackage{listings}
+\lstset{extendedchars=\true}
+$0
+endsnippet
+
+snippet pack_graph "Include grapchics path"
+\usepackage{graphicx}
+\graphicspath{${1:{pictures/}}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+$0
+endsnippet
+	
+snippet incg "Include image"
+\begin{figure}[!h]
+	\centering
+	\includegraphics[${1:scale=0.5}]{${2:logo}}
+	\caption{$4}
+	\label{fig:$3}
+\end{figure}
+$0
+endsnippet
+
+snippet a4paper "Geometry package with A4 paper settings"
+\usepackage{geometry}
+\geometry{paperheight=279.4mm,paperwidth=210mm}
+$0
+endsnippet

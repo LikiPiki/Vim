@@ -14,13 +14,9 @@ map <C-n> :NERDTreeToggle<CR>
 set noshowmode
 
 imap df <esc>
-" map <space> :
 noremap ; :
 map <leader>fs :terminal<CR>
 tnoremap <Esc> <C-\><C-n>:q!<CR>
-" map <leader>c :Clap<CR>
-" map <leader>b :Clap buffers<CR>
-map <C-p> :Clap files<CR>
 
 inoremap <expr><C-h>  neocomplcache#close_popup()
 map <C-n> :NERDTreeToggle<CR>
@@ -54,7 +50,6 @@ augroup GOlang
         \| nmap <buffer> <LocalLeader>I   <Plug>(go-imports)
         \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
 augroup END
-
 
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 " Plug 'mxw/vim-jsx', { 'for': 'javascript' }
@@ -121,26 +116,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 
-
-"--- Autocomplete ---
-"Deoplete completition
-	" Plug 'Shougo/deoplete.nvim'
-	" set completeopt-=preview
-	" let g:deoplete#enable_at_startup = 1
-    "
-	" Plug 'zchee/deoplete-jedi'
-" ---
-
-" Coc ---
-	source $HOME/.config/nvim/coc.vim
-" ---
-
-inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
-
 "--- Snippets
 Plug 'SirVer/ultisnips'
-let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/Snips/UltiSnips"]
 let g:UltiSnipsEditSplit="vertical"
 map <leader>u :UltiSnipsEdit<CR>
 
@@ -161,6 +138,7 @@ endfunction
 
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Custom completition like SUPERTab (like VSCode snippets works)
 function! g:UltiSnips_Complete()
 	if g:ulti_snippet_expanded == 0
@@ -181,8 +159,21 @@ endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 Plug 'honza/vim-snippets'
-Plug 'LikiPiki/Snips'
-" Change ultisnips directory to my snippets dir
+
+"--- Autocomplete ---
+"Deoplete completition {{{
+	" Plug 'Shougo/deoplete.nvim'
+	" set completeopt-=preview
+	" let g:deoplete#enable_at_startup = 1
+	" Plug 'zchee/deoplete-jedi'
+"}}}
+
+" Coc completition {{{
+	source $HOME/.config/nvim/coc.vim
+"}}}
+
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
 "--- Syntax checking ---
 Plug 'dense-analysis/ale'
@@ -193,6 +184,8 @@ Plug 'lervag/vimtex'
 autocmd Filetype tex setl updatetime=1
 let g:vimtex_quickfix_mode=0
 let g:tex_flavor = "latex"
+set conceallevel=1
+let g:tex_conceal='abdmg' 
 
 "--- Color Themes ---
 Plug 'morhetz/gruvbox'
