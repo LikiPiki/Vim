@@ -2,6 +2,7 @@
 set cursorline
 
 set number
+set relativenumber
 set colorcolumn=80
 
 set tabstop=4
@@ -39,6 +40,10 @@ set foldlevel=12
 
 " show first row for ALE
 set signcolumn=yes
+
+" --- LANG MAP ---
+imap оо <Esc>
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ№;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>#
 
 syntax on
 

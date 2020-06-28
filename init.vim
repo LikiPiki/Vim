@@ -1,10 +1,5 @@
 " This init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
-" 1. Install Vim - Plug -> curl -fL
-" ~/.vim/autoload/plug.vim --create-dirs \
-" 	https://raw.githubusercjntent.com/junegunn/vim-plug/master/plug.vim
-" 2. Copy this .vimrc to your .vimrc
-" 3. Go to vim and :PlugInstall
-
+"
 " --- Vim-Plug BEGIN
 "
 call plug#begin('~/.vim/plugged')
@@ -12,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " --- KeyMap ---
 let mapleader=","
 let maplocalleader = " "
-
+	
 map <C-n> :NERDTreeToggle<CR>
 
 " dont show status
@@ -21,9 +16,8 @@ set noshowmode
 imap df <esc>
 " map <space> :
 noremap ; :
-map <leader>fs :w<CR>
 map <leader>fs :terminal<CR>
-map <leader>t :terminal<CR>
+tnoremap <Esc> <C-\><C-n>:q!<CR>
 " map <leader>c :Clap<CR>
 " map <leader>b :Clap buffers<CR>
 map <C-p> :Clap files<CR>
@@ -39,7 +33,6 @@ set termguicolors
 
 " testing wakatime	
 Plug 'wakatime/vim-wakatime'
-
 " --- Language support --- 
 Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 
@@ -62,12 +55,6 @@ augroup GOlang
         \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
 augroup END
 
-augroup GOlang
-    au!
-    autocmd FileType go
-        \  nmap <buffer> <LocalLeader>b   :make
-augroup END
-Plug 'zchee/deoplete-jedi'
 
 Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 " Plug 'mxw/vim-jsx', { 'for': 'javascript' }
@@ -96,7 +83,7 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
 " --- FZF Keybindings ---
 map <C-p> :Files<CR>
-map <leader>b :Buffers<CR>
+" map <leader>b :Buffers<CR>
 nnoremap <leader>g :Rg<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
@@ -136,9 +123,17 @@ nmap <F8> :TagbarToggle<CR>
 
 
 "--- Autocomplete ---
-Plug 'Shougo/deoplete.nvim'
-set completeopt-=preview
-let g:deoplete#enable_at_startup = 1
+"Deoplete completition
+	" Plug 'Shougo/deoplete.nvim'
+	" set completeopt-=preview
+	" let g:deoplete#enable_at_startup = 1
+    "
+	" Plug 'zchee/deoplete-jedi'
+" ---
+
+" Coc ---
+	source $HOME/.config/nvim/coc.vim
+" ---
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
@@ -149,18 +144,18 @@ let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/Snips/UltiSnips"]
 let g:UltiSnipsEditSplit="vertical"
 map <leader>u :UltiSnipsEdit<CR>
 
-let g:ulti_expand_res = 0
+let g:ulti_snippet_expanded = 0
 autocmd! User UltiSnipsEnterFirstSnippet
 autocmd User UltiSnipsEnterFirstSnippet call UltiSnipsSnippetStart()
 autocmd! User UltiSnipsExitLastSnippet
 autocmd User UltiSnipsExitLastSnippet call UltiSnipsSnippetEnd()
 
 function! UltiSnipsSnippetStart()
-	let g:ulti_expand_res = 1
+	let g:ulti_snippet_expanded = 1
 endfunction
 
 function! UltiSnipsSnippetEnd()
-	let g:ulti_expand_res = 0
+	let g:ulti_snippet_expanded = 0
 	echo "Inside snippet"
 endfunction
 
@@ -168,7 +163,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Custom completition like SUPERTab (like VSCode snippets works)
 function! g:UltiSnips_Complete()
-	if g:ulti_expand_res == 0
+	if g:ulti_snippet_expanded == 0
 		call UltiSnips#ExpandSnippet()
 		if g:ulti_expand_res == 0
 			if pumvisible()
@@ -228,13 +223,17 @@ map <leader>w :AirlineToggleWhitespace<CR>
 
 " --- Default simple configuration ---
 source $HOME/.config/nvim/settings.vim
+source $HOME/.config/nvim/keys.vim
 
 " --- Vim-Plug END ---
 call plug#end()
 
 " You must call deoplete#custom#source() after plug#end().
 " Because, plug#end() add plugins runtimepath.
-call deoplete#custom#source('ultisnips', 'rank', 9999)
+" call deoplete#custom#source('ultisnips', 'rank', 9999)
+
+" Register which key map
+call which_key#register(',', "g:which_key_map")
 
 color one
 
