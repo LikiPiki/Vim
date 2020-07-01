@@ -1,3 +1,19 @@
+snippet xedir "Xelatex directive"
+%!TeX program = xelatex$0
+endsnippet
+
+snippet titul "Titul page, for univercity"
+\def\caf{${1:14}}
+\def\prepod{${2:prepod_name}}
+\def\prepodz{${3:prepod_status}}
+\def\labname{${4:labname}}
+\def\labdist{${5:lab_dist}}
+
+\input{titul.tex}
+\titlepage
+$0
+endsnippet
+
 snippet simpledoc "The simple latex document"
 \documentclass[12pt]{article}
 \usepackage[english, russian]{babel}
@@ -13,15 +29,8 @@ snippet // "frac{}"
 \frac{${1:${VISUAL}}}{$2}$0
 endsnippet
 
-snippet ^ "Power visual"
+snippet ^ "Power"
 {${1:${VISUAL}}}^{$2}$0
-endsnippet
-
-snippet box "Box"
-`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
-│ $1 │
-`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
-$0
 endsnippet
 
 snippet use "\usepackage"
@@ -36,7 +45,7 @@ endsnippet
 
 snippet pack_graph "Include grapchics path"
 \usepackage{graphicx}
-\graphicspath{${1:{pictures/}}}
+\graphicspath{{${1:pictures/}}}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 $0
 endsnippet
@@ -44,7 +53,7 @@ endsnippet
 snippet incg "Include image"
 \begin{figure}[!h]
 	\centering
-	\includegraphics[${1:scale=0.5}]{${2:logo}}
+	\includegraphics[${1:width=0.5\textwidth}]{${2:logo}}
 	\caption{$4}
 	\label{fig:$3}
 \end{figure}
@@ -53,6 +62,54 @@ endsnippet
 
 snippet a4paper "Geometry package with A4 paper settings"
 \usepackage{geometry}
-\geometry{paperheight=279.4mm,paperwidth=210mm}
+\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1.5cm}
 $0
 endsnippet
+
+snippet pack_colorbox "ColorBox snippet"
+\usepackage[most]{tcolorbox}
+% My fancy boxes
+\newtcolorbox{mybox}[1][]{
+	enhanced,
+	arc=0pt,
+	outer arc=0pt,
+	colback=white,
+	boxrule=1pt,
+	#1
+}
+$0
+endsnippet
+
+snippet packtheorems "Theorems packages"
+\usepackage{amsthm}
+\newtheorem{theorem}{Теорема}
+\newtheorem{myrule}{Правило}
+
+\usepackage{mdframed}
+\mdfdefinestyle{theoremsStyle}{
+	innertopmargin=5pt,
+	innerbottommargin=10pt
+}
+\newmdtheoremenv[style=theoremsStyle]{btheorem}{Теорема}
+\newmdtheoremenv[style=theoremsStyle]{brule}{Правило}
+$0
+endsnippet
+
+snippet graph "Draw graphic by pgfplots"
+\begin{figure}[!h]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+			title = $1,
+			xlabel = {$x$},
+			ylabel = {$y$},
+		]
+			\addplot[${2:color}] {${3:formula}};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{$4}%
+	\label{$5}
+\end{figure}
+$6
+endsnippet
+	
