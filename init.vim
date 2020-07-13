@@ -1,4 +1,4 @@
-" This init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
+"  init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
 "
 " --- Vim-Plug BEGIN
 "
@@ -51,14 +51,14 @@ augroup GOlang
         \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
 augroup END
 
-Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
+" Javascript plugins
+" Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
 " Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 "--- Tools Plugins ---
 "  git suppert
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-
 Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -82,13 +82,13 @@ map <C-p> :Files<CR>
 nnoremap <leader>g :Rg<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
-nnoremap <leader>f :Lines<CR>
+" nnoremap <leader>f :Lines<CR>
 nnoremap <leader>c :Commands<CR>
 
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-
+"
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_across_no_line=1
 
@@ -100,9 +100,9 @@ vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 Plug 'AndrewRadev/splitjoin.vim'
-
+"
 Plug 'matze/vim-move'
-
+"
 Plug 'vim-scripts/tComment'
 " Plug 'terryma/vim-multiple-cursors'
 " let g:multi_cursor_next_key='<C-d>'
@@ -119,7 +119,6 @@ nmap <F8> :TagbarToggle<CR>
 "--- Snippets
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsEditSplit="vertical"
-map <leader>u :UltiSnipsEdit<CR>
 
 let g:ulti_snippet_expanded = 0
 autocmd! User UltiSnipsEnterFirstSnippet
@@ -165,8 +164,8 @@ Plug 'honza/vim-snippets'
 	" Plug 'Shougo/deoplete.nvim'
 	" set completeopt-=preview
 	" let g:deoplete#enable_at_startup = 1
-	" Plug 'zchee/deoplete-jedi'
 "}}}
+" Plug 'zchee/deoplete-jedi'
 
 " Coc completition {{{
 	source $HOME/.config/nvim/coc.vim
@@ -180,13 +179,6 @@ Plug 'dense-analysis/ale'
 nmap <silent> <A-l> <Plug>(ale_previous_wrap)
 nmap <silent> <A-h> <Plug>(ale_next_wrap)
 
-Plug 'lervag/vimtex'
-autocmd Filetype tex setl updatetime=1
-let g:vimtex_quickfix_mode=0
-let g:tex_flavor = "latex"
-set conceallevel=1
-let g:tex_conceal='abdmg' 
-
 "--- Color Themes ---
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
@@ -196,21 +188,25 @@ Plug 'rakr/vim-one'
 " --- AIRLINE ---
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 Plug 'edkolev/tmuxline.vim'
 
 let g:airline_powerline_fonts = 0
 let g:airline_theme='one'
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_exclude_preview = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#ale#enabled = 1
 let airline#extensions#ale#error_symbol = 'E:'
 let airline#extensions#ale#warning_symbol = 'W:'
 let g:airline#extensions#whitespace#enabled = 0
-let airline#extensions#ale#show_line_numbers = 1
+let airline#extensions#ale#show_line_numbers = 0
+
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#enabled = 1
+
+set showtabline=2
 
 map <leader>w :AirlineToggleWhitespace<CR>
 

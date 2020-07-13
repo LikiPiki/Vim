@@ -42,7 +42,7 @@ set foldlevel=12
 set signcolumn=yes
 
 " --- LANG MAP ---
-imap оо <Esc>
+" imap оо <Esc>
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ№;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>#
 
 syntax on

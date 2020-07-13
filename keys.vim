@@ -23,14 +23,14 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+let g:which_key_map['_'] = { 'name': 'which_key_ignore' }
+
 " --- Keybindings ---
 let g:which_key_map['c'] = [ ':Commands', 'fuzzy-commands']
-let g:which_key_map['f'] = [ ':Lines', 'find-in-buffers']
-let g:which_key_map['u'] = [ ':UltiSnipsEdit', 'edit-ultisnips']
 let g:which_key_map['w'] = [ ':AirlineToggleWhiteSpace', 'togle-whitespace']
 
 let g:which_key_map.b = {
-      \ 'name' : '+buffer' ,
+      \ 'name' : '+Buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
       \ '2' : ['b2'        , 'buffer 2']        ,
       \ 'd' : ['bd'        , 'delete-buffer']   ,
@@ -39,5 +39,19 @@ let g:which_key_map.b = {
       \ 'n' : ['bnext'     , 'next-buffer']     ,
       \ 'p' : ['bprevious' , 'previous-buffer'] ,
       \ 'b' : ['Buffers'   , 'fzf-buffer']      ,
+      \ 'F' : [':Lines'    , 'Find in buffer']  ,
       \ }
+
+
+let g:which_key_map.u = {
+      \ 'name' : '+Snippets' ,
+	  \ 'l' : [':CocList snippets', 'Snippets list' ],
+	  \ 'u' : [':UltisnipsEdit', 'Ultisnips Edit' ],
+      \ }
+
+let g:which_key_map.f = {
+      \ 'name' : '+Files' ,
+	  \ 'f' : [':NERDTreeFind', 'Find file' ],
+	  \ 's' : [':w', 'Save' ],
+	  \ }
 
