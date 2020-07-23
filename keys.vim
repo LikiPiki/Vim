@@ -31,8 +31,13 @@ let g:which_key_map['B'] = [ ':BD', 'delete-buffers']
 let g:which_key_map['w'] = [ ':AirlineToggleWhiteSpace', 'togle-whitespace']
 
 " For coc-explorer
-let g:which_key_map['e'] = [ ':CocCommand explorer', 'file-tree']
 let g:which_key_map['E'] = [ ':CocCommand explorer --preset floating', 'file-tree-float']
+
+let g:which_key_map.e = {
+	\ 'name': "+Errors",
+	\ 's': ["ALEFixSuggest", "fix-suggest"],
+	\ 'f': ["ALEFix", "fix"],
+	\ } 
 
 let g:which_key_map.b = {
       \ 'name' : '+Buffer' ,

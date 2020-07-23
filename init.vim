@@ -13,13 +13,11 @@ set noshowmode
 
 imap df <esc>
 noremap ; :
+
 map <leader>fs :terminal<CR>
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
 
-inoremap <expr><C-h>  neocomplcache#close_popup()
-
 map <F7> :AirlineToggleWhitespace<CR>
-nmap <F8> :TagbarToggle<CR>
 
 Plug 'mhinz/vim-startify'
 let g:startify_bookmarks = [
@@ -29,6 +27,10 @@ let g:startify_bookmarks = [
 		\ ]
 
 set termguicolors
+
+map <A-h> :bp<CR>
+map <A-l> :bn<CR>
+map <A-d> :bd<CR>
 
 " testing wakatime	
 Plug 'wakatime/vim-wakatime'
@@ -122,7 +124,7 @@ set smartcase
 
 Plug 'AndrewRadev/splitjoin.vim'
 "
-Plug 'matze/vim-move'
+" Plug 'matze/vim-move'
 "
 Plug 'vim-scripts/tComment'
 " Plug 'terryma/vim-multiple-cursors'
@@ -133,9 +135,6 @@ Plug 'vim-scripts/tComment'
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
-
-Plug 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
 
 "--- Snippets
 Plug 'SirVer/ultisnips'
@@ -193,9 +192,14 @@ inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
 "--- Syntax checking ---
-Plug 'dense-analysis/ale'
-nmap <silent> <A-l> <Plug>(ale_previous_wrap)
-nmap <silent> <A-h> <Plug>(ale_next_wrap)
+" Plug 'dense-analysis/ale'
+" nmap <silent> <A-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <A-j> <Plug>(ale_next_wrap)
+"
+" " let g:ale_set_highlights = 0 " Disable highligting
+"
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
 
 "--- Color Themes ---
 Plug 'morhetz/gruvbox'

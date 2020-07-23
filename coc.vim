@@ -24,7 +24,6 @@ let g:coc_global_extensions = [
 		\ 'coc-snippets',
         \ 'coc-prettier',
         \ 'coc-explorer',
-        \ 'coc-diagnostic'
         \ ]
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -63,10 +62,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+"Diagnistics
+nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Explorer
-nmap <leader>e :CocCommand explorer<CR>
-nmap <leader>E :CocCommand explorer --preset floating<CR>
 nmap <C-n> :CocCommand explorer<CR>
 
 let g:coc_explorer_global_presets = {

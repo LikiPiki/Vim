@@ -1,4 +1,4 @@
-# Vim config by Saby
+# Vim config by Likipiki
 <img src="https://raw.githubusercontent.com/LikiPiki/Vim/master/screenshot.png"/>
 
 Two autocomplete configurations coc and deoplete with LSP, snippets by Ultisnips
