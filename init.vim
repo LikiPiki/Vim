@@ -116,7 +116,9 @@ omap / <Plug>(easymotion-tn)
 nmap s <Plug>(easymotion-s2)
 vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
-let g:EasyMotion_smartcase = 1
+
+set ignorecase
+set smartcase
 
 Plug 'AndrewRadev/splitjoin.vim'
 "
@@ -199,6 +201,7 @@ nmap <silent> <A-h> <Plug>(ale_next_wrap)
 Plug 'morhetz/gruvbox'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 
 " --- AIRLINE ---
@@ -206,7 +209,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let g:airline_theme='one'
 let g:airline_exclude_preview = 1
 let g:airline#extensions#ale#enabled = 1
