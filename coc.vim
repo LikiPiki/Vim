@@ -62,3 +62,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+
+
+" Explorer
+nmap <leader>e :CocCommand explorer<CR>
+nmap <leader>E :CocCommand explorer --preset floating<CR>
+nmap <C-n> :CocCommand explorer<CR>
+
+let g:coc_explorer_global_presets = {
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\ }

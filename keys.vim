@@ -27,7 +27,12 @@ let g:which_key_map['_'] = { 'name': 'which_key_ignore' }
 
 " --- Keybindings ---
 let g:which_key_map['c'] = [ ':Commands', 'fuzzy-commands']
+let g:which_key_map['B'] = [ ':BD', 'delete-buffers']
 let g:which_key_map['w'] = [ ':AirlineToggleWhiteSpace', 'togle-whitespace']
+
+" For coc-explorer
+let g:which_key_map['e'] = [ ':CocCommand explorer', 'file-tree']
+let g:which_key_map['E'] = [ ':CocCommand explorer --preset floating', 'file-tree-float']
 
 let g:which_key_map.b = {
       \ 'name' : '+Buffer' ,
@@ -46,7 +51,7 @@ let g:which_key_map.b = {
 let g:which_key_map.u = {
       \ 'name' : '+Snippets' ,
 	  \ 'l' : [':CocList snippets', 'Snippets list' ],
-	  \ 'u' : [':UltisnipsEdit', 'Ultisnips Edit' ],
+	  \ 'u' : [':UltiSnipsEdit', 'Ultisnips Edit' ],
       \ }
 
 let g:which_key_map.f = {

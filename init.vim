@@ -8,22 +8,25 @@ call plug#begin('~/.vim/plugged')
 let mapleader=","
 let maplocalleader = " "
 	
-map <C-n> :NERDTreeToggle<CR>
-
 " dont show status
 set noshowmode
 
 imap df <esc>
 noremap ; :
 map <leader>fs :terminal<CR>
-tnoremap <Esc> <C-\><C-n>:q!<CR>
+tnoremap <ESC> <C-\><C-n><C-w><C-p>
 
 inoremap <expr><C-h>  neocomplcache#close_popup()
-map <C-n> :NERDTreeToggle<CR>
 
-map <F6> :Gist<CR>
 map <F7> :AirlineToggleWhitespace<CR>
 nmap <F8> :TagbarToggle<CR>
+
+Plug 'mhinz/vim-startify'
+let g:startify_bookmarks = [
+		\ { 'i': '~/.config/nvim/init.vim' },
+		\ { 'n': '~/.config/nvim' },
+		\ { 'z': '~/.zshrc' },
+		\ ]
 
 set termguicolors
 
@@ -51,16 +54,10 @@ augroup GOlang
         \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
 augroup END
 
-" Javascript plugins
-" Plug 'pangloss/vim-javascript', { 'for' : 'javascript' }
-" Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-
 "--- Tools Plugins ---
-"  git suppert
+"  git support
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree' , { 'on':  'NERDTreeToggle' }
-let NERDTreeIgnore = ['\.pyc$']
 
 Plug 'tpope/vim-repeat'
 
@@ -70,12 +67,31 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+
+" FZF Delete buffers
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
+
 " --- FZF Keybindings ---
 map <C-p> :Files<CR>
 " map <leader>b :Buffers<CR>
@@ -84,6 +100,8 @@ nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
 " nnoremap <leader>f :Lines<CR>
 nnoremap <leader>c :Commands<CR>
+nnoremap <leader>B :BD<CR>
+nnoremap <C-s> :BLines<CR>
 
 
 Plug 'tpope/vim-surround'
@@ -98,6 +116,7 @@ omap / <Plug>(easymotion-tn)
 nmap s <Plug>(easymotion-s2)
 vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
+let g:EasyMotion_smartcase = 1
 
 Plug 'AndrewRadev/splitjoin.vim'
 "
@@ -161,11 +180,8 @@ Plug 'honza/vim-snippets'
 
 "--- Autocomplete ---
 "Deoplete completition {{{
-	" Plug 'Shougo/deoplete.nvim'
-	" set completeopt-=preview
-	" let g:deoplete#enable_at_startup = 1
+	" source $HOME/.config/nvim/deoplete.vim
 "}}}
-" Plug 'zchee/deoplete-jedi'
 
 " Coc completition {{{
 	source $HOME/.config/nvim/coc.vim
