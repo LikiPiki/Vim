@@ -209,10 +209,44 @@ Plug 'Rigellute/shades-of-purple.vim'
 
 " -- Lightline --
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 0
+
+let g:lightline = {
+			\ 'active': {
+            \       'left': [ [ 'mode', 'paste' ],
+            \               [ 'gitbranch' ],
+            \               [ 'spell', 'readonly', 'filetype', 'filename' ]],
+            \       'right': [ [ 'percent' ], [ 'lineinfo' ],
+            \               [ 'fileformat', 'fileencoding' ],
+            \               [ 'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \   },
+			\   'component_expand': {
+            \   },
+			\   'component_function': {
+			\       'gitbranch': 'FugitiveHead',
+            \       'cocstatus': 'coc#status'
+            \   },
+            \   'component_type': {
+            \       'readonly': 'error',
+            \       'linter_warnings': 'warning',
+            \       'linter_errors': 'error',
+            \       'buffers': 'tabsel'
+            \   },
+            \   'separator': { 'left': '', 'right': '' },
+            \   'subseparator': { 'left': '', 'right': '' }
+		\ }
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_raw = {'buffers': 1}
+let g:lightline#bufferline#clickable = 1
+
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 set showtabline=2
-
-map <leader>w :AirlineToggleWhitespace<CR>
 
 " --- Default simple configuration ---
 source $HOME/.config/nvim/settings.vim
@@ -229,6 +263,6 @@ call plug#end()
 call which_key#register(',', "g:which_key_map")
 
 let g:shades_of_purple_lightline = 1
-let g:lightline = { 'colorscheme': 'shades_of_purple' }
+let g:lightline.colorscheme = 'shades_of_purple'
 color shades_of_purple
 
