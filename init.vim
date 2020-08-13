@@ -203,31 +203,12 @@ inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
 "--- Color Themes ---
 Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
-Plug 'mhartington/oceanic-next'
 Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
+Plug 'Rigellute/shades-of-purple.vim'
 
-" --- AIRLINE ---
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
-
-let g:airline_powerline_fonts = 1
-let g:airline_theme='one'
-let g:airline_exclude_preview = 1
-let g:airline#extensions#ale#enabled = 1
-let airline#extensions#ale#error_symbol = 'E:'
-let airline#extensions#ale#warning_symbol = 'W:'
-let g:airline#extensions#whitespace#enabled = 0
-let airline#extensions#ale#show_line_numbers = 0
-
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-let g:airline#extensions#tabline#enabled = 1
+" -- Lightline --
+Plug 'itchyny/lightline.vim'
 
 set showtabline=2
 
@@ -247,5 +228,7 @@ call plug#end()
 " Register which key map
 call which_key#register(',', "g:which_key_map")
 
-color one
+let g:shades_of_purple_lightline = 1
+let g:lightline = { 'colorscheme': 'shades_of_purple' }
+color shades_of_purple
 
