@@ -65,6 +65,9 @@ Plug 'tpope/vim-repeat'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 " This is the default extra key bindings
 let g:fzf_action = {
@@ -108,7 +111,7 @@ nnoremap <C-s> :BLines<CR>
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-"
+
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_across_no_line=1
 
@@ -175,7 +178,7 @@ function! g:UltiSnips_Complete()
 	return ""
 endfunction
 
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<CR>"
 
 Plug 'honza/vim-snippets'
 
@@ -207,6 +210,14 @@ Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 Plug 'Rigellute/shades-of-purple.vim'
 
+" --- LaTeX ---
+Plug 'lervag/vimtex'
+autocmd Filetype tex setl updatetime=1
+let g:vimtex_quickfix_mode=0
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'skim'
+map <F1> :set spell spelllang=ru,en<CR>
+
 " -- Lightline --
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
@@ -227,7 +238,8 @@ let g:lightline = {
             \   },
 			\   'component_function': {
 			\       'gitbranch': 'FugitiveHead',
-            \       'cocstatus': 'coc#status'
+            \       'cocstatus': 'coc#status',
+            \       'currentfunction': 'helpers#lightline#currentFunction'
             \   },
             \   'component_type': {
             \       'readonly': 'error',
