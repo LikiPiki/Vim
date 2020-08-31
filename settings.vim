@@ -7,6 +7,7 @@ set colorcolumn=80
 
 set tabstop=4
 set shiftwidth=4
+set expandtab
 set smarttab
 set smartindent
 set encoding=utf8

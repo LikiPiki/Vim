@@ -34,8 +34,9 @@ map <A-d> :bd<CR>
 
 " testing wakatime	
 Plug 'wakatime/vim-wakatime'
+Plug 'sheerun/vim-polyglot'
 " --- Language support --- 
-Plug 'valloric/MatchTagAlways', { 'for': 'html' }
+" Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 augroup GOlang
@@ -66,12 +67,14 @@ Plug 'tpope/vim-repeat'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
@@ -108,7 +111,7 @@ nnoremap <C-s> :BLines<CR>
 
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-"
+
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_across_no_line=1
 
@@ -191,6 +194,16 @@ Plug 'honza/vim-snippets'
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
+" -- LaTex Support
+Plug 'lervag/vimtex'
+autocmd Filetype tex setl updatetime=1
+let g:vimtex_quickfix_mode=0
+let g:tex_flavor = "latex"
+" set conceallevel=1
+" let g:tex_conceal='abdmg'
+let g:vimtex_view_method = 'mupdf'
+map <F1> :set spell spelllang=ru,en<CR>
+
 "--- Syntax checking ---
 " Plug 'dense-analysis/ale'
 " nmap <silent> <A-k> <Plug>(ale_previous_wrap)
@@ -265,4 +278,3 @@ call which_key#register(',', "g:which_key_map")
 let g:shades_of_purple_lightline = 1
 let g:lightline.colorscheme = 'shades_of_purple'
 color shades_of_purple
-

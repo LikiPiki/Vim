@@ -37,9 +37,21 @@ snippet use "\usepackage"
 \usepackage${2:[${1:params}]}{${3:package}}$0
 endsnippet
 
+snippet f "Insert inline formula"
+\($0
+endsnippet
+
 snippet pack_listing "Include lslisting package"
 \usepackage{listings}
-\lstset{extendedchars=\true}
+\lstset{
+    numberstyle=\footnotesize,
+    numbers=left,
+    tabsize=2,
+    title=\lstname,
+    breaklines=true,
+	xleftmargin=\parindent,
+	texcl=true
+}
 $0
 endsnippet
 
@@ -55,7 +67,7 @@ snippet incg "Include image"
 	\centering
 	\includegraphics[${1:width=0.5\textwidth}]{${2:logo}}
 	\caption{$4}
-	\label{fig:$3}
+	\label{fig:${3:${2/(\w+).\w+/$1/}}}
 \end{figure}
 $0
 endsnippet
@@ -107,9 +119,23 @@ snippet graph "Draw graphic by pgfplots"
 			\addplot[${2:color}] {${3:formula}};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{$4}%
-	\label{$5}
+	\caption{$4}
+	\label{graph:$5}
 \end{figure}
 $6
+endsnippet
+
+snippet images_fix "Fix images in sections"
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+endsnippet
+
+snippet dont_wrap "Dont wrap words"
+\usepackage{ragged2e}
+\usepackage{microtype}
+
+\justifying
+\sloppy
+\hyphenpenalty=10000
 endsnippet
 	
