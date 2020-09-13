@@ -138,4 +138,24 @@ snippet dont_wrap "Dont wrap words"
 \sloppy
 \hyphenpenalty=10000
 endsnippet
-	
+
+snippet noenumseparator "List item separator 0pt"
+% set list item separator 0pt
+\usepackage{enumitem}
+\setitemize{itemsep=0pt}
+\setenumerate{itemsep=0pt}
+$0
+endsnippet
+
+# Autosnippets
+snippet '\/(ls|ит)' "List item" wrA
+\item $0
+endsnippet
+
+snippet '\/(bf|жр)' "Bold text" wrA
+\textbf{$1} $0
+endsnippet
+
+snippet '\/(it|кр)' "Italic text" wrA
+\textit{$1} $0
+endsnippet

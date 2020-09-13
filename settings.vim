@@ -34,7 +34,7 @@ set encoding=utf8
 
 "--- Code folding ---
 set foldmethod=indent
-set foldlevel=12
+set foldlevel=3
 
 " autocmd BufWinLeave *.* mkview 
 " autocmd BufWinEnter *.* silent loadview
@@ -45,6 +45,9 @@ set signcolumn=yes
 " --- LANG MAP ---
 " imap оо <Esc>
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ№;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>#
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
 
 syntax on
 

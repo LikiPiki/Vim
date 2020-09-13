@@ -197,7 +197,7 @@ Plug 'honza/vim-snippets'
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
 
-" -- LaTex Support
+" -- LaTex ---
 Plug 'lervag/vimtex'
 autocmd Filetype tex setl updatetime=1
 let g:vimtex_quickfix_mode=0
@@ -222,14 +222,6 @@ Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 Plug 'Rigellute/shades-of-purple.vim'
-
-" --- LaTeX ---
-Plug 'lervag/vimtex'
-autocmd Filetype tex setl updatetime=1
-let g:vimtex_quickfix_mode=0
-let g:tex_flavor = "latex"
-let g:vimtex_view_method = 'skim'
-map <F1> :set spell spelllang=ru,en<CR>
 
 " -- Lightline --
 Plug 'itchyny/lightline.vim'
