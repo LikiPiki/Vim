@@ -9,7 +9,8 @@ This is my Vim/Neovim configuration with lsp support and snippets by Ultisnips
 git clone https://github.com/LikiPiki/Vim ~/.config/nvim
 ```
 
-# Vim config installation
+# Installing script
 ```bash
-
+curl -L https://raw.githubusercontent.com/LikiPiki/Vim/master/install.sh | bash
 ```
+

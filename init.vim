@@ -303,7 +303,7 @@ EOF
 
 :lua << EOF
    local nvim_lsp = require('lspconfig')
-   local servers = {'clangd', 'jsonls', 'html', 'tsserver'}
+   local servers = {'clangd', 'jsonls', 'html', 'tsserver', 'gopls'}
    local on_attach = function(_, bufnr)
 	   require('diagnostic').on_attach()
 	   require('completion').on_attach()
