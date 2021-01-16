@@ -1,20 +1,15 @@
 # Vim config by Likipiki
+
 <img src="https://raw.githubusercontent.com/LikiPiki/Vim/master/screenshot.png"/>
 
-Two autocomplete configurations coc and deoplete with LSP, snippets by Ultisnips
-```
-default: coc
-```
+This is my Vim/Neovim configuration with lsp support and snippets by Ultisnips
 
-Config for GO dev
-
-
-Not worked now
-```
-curl -L https://goo.gl/s0O0wf | bash
+# Neovim config installation
+```bash
+git clone https://github.com/LikiPiki/Vim ~/.config/nvim
 ```
 
-Or download this script and run installVim.sh (only for OSX)
+# Vim config installation
+```bash
 
-## Lest go CODE.......
-
+```

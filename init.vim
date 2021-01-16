@@ -1,7 +1,6 @@
 "  init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
 "
 " --- Vim-Plug BEGIN
-"
 call plug#begin('~/.vim/plugged')
 
 " --- KeyMap ---
@@ -17,8 +16,6 @@ noremap ; :
 map <leader>fs :terminal<CR>
 tnoremap <ESC> <C-\><C-n><C-w><C-p>
 
-map <F7> :AirlineToggleWhitespace<CR>
-
 Plug 'mhinz/vim-startify'
 let g:startify_bookmarks = [
 		\ { 'i': '~/.config/nvim/init.vim' },
@@ -32,11 +29,8 @@ map <A-h> :bp<CR>
 map <A-l> :bn<CR>
 map <A-d> :bd<CR>
 
-" testing wakatime	
-Plug 'wakatime/vim-wakatime'
-Plug 'sheerun/vim-polyglot'
-" --- Language support --- 
-" Plug 'valloric/MatchTagAlways', { 'for': 'html' }
+
+Plug 'valloric/MatchTagAlways', { 'for': 'html' }
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 augroup GOlang
@@ -57,12 +51,15 @@ augroup GOlang
         \| nmap <buffer> <LocalLeader>l   <Plug>(go-lint)
 augroup END
 
+" Plug 'sheerun/vim-polyglot'
+
 "--- Tools Plugins ---
 "  git support
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/goyo.vim'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -70,14 +67,12 @@ Plug 'junegunn/fzf.vim'
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
 let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden"
@@ -111,7 +106,6 @@ nnoremap <leader>c :Commands<CR>
 nnoremap <leader>B :BD<CR>
 nnoremap <C-s> :BLines<CR>
 
-
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
@@ -122,25 +116,20 @@ Plug 'easymotion/vim-easymotion'
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 nmap s <Plug>(easymotion-s2)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 vnoremap <leader>f y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 set ignorecase
 set smartcase
 
-Plug 'AndrewRadev/splitjoin.vim'
-"
-" Plug 'matze/vim-move'
-"
 Plug 'vim-scripts/tComment'
-" Plug 'terryma/vim-multiple-cursors'
-" let g:multi_cursor_next_key='<C-d>'
-" let g:multi_cursor_skip_key='<C-x>'
-" let g:multi_cursor_quit_key='<Esc>'
-
-Plug 'terryma/vim-expand-region'
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
 
 "--- Snippets
 Plug 'SirVer/ultisnips'
@@ -164,7 +153,7 @@ endfunction
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Custom completition like SUPERTab (like VSCode snippets works)
+" Custom completition (like VSCode snippets works)
 function! g:UltiSnips_Complete()
 	if g:ulti_snippet_expanded == 0
 		call UltiSnips#ExpandSnippet()
@@ -185,43 +174,64 @@ au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:U
 
 Plug 'honza/vim-snippets'
 
-"--- Autocomplete ---
-"Deoplete completition {{{
-	" source $HOME/.config/nvim/deoplete.vim
-"}}}
+" Install nightly neovim plugins, or use COC for autocomplete
+if has('nvim-0.5')
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	" Neovim lua file manager
+	Plug 'kyazdani42/nvim-tree.lua'
+	let g:nvim_tree_show_icons = {
+		\ 'git': 1,
+		\ 'folders': 0,
+		\ 'files': 0,
+		\ }
+	let g:nvim_tree_bindings = {
+    \ 'edit': ['<CR>', 'l'],
+	\ 'close_node': ['<S-CR>', 'h'],
+	\ }
+	nnoremap <C-n> :NvimTreeToggle<CR>
 
-" Coc completition {{{
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'nvim-lua/completion-nvim'
+	Plug 'steelsojka/completion-buffers'
+	let g:completion_trigger_keyword_length = 3
+	let g:completion_enable_snippet = 'UltiSnips'
+	let g:completion_trigger_on_delete = 0
+	let g:completion_auto_change_source = 1
+	let g:completion_timer_cycle = 90 "default value is 80
+	let g:completion_chain_complete_list = [
+		\{'complete_items': ['lsp']},
+		\{'complete_items': ['buffers']},
+		\{'complete_items': ['snippet']},
+		\{'mode': '<c-p>'},
+		\{'mode': '<c-n>'}
+	\]
+	set completeopt=menuone,noinsert,noselect
+	set pumheight=10
+	set shortmess+=c
+	set complete-=t " disable tags complete
+	" Use <Tab> and <S-Tab> to navigate through popup menu
+	autocmd BufEnter * lua require'completion'.on_attach()
+else
 	source $HOME/.config/nvim/coc.vim
-"}}}
+endif
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
-
-" -- LaTex ---
-Plug 'lervag/vimtex'
-autocmd Filetype tex setl updatetime=1
-let g:vimtex_quickfix_mode=0
-let g:tex_flavor = "latex"
-" set conceallevel=1
-" let g:tex_conceal='abdmg'
-let g:vimtex_view_method = 'mupdf'
-map <F1> :set spell spelllang=ru,en<CR>
-
-"--- Syntax checking ---
-" Plug 'dense-analysis/ale'
-" nmap <silent> <A-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <A-j> <Plug>(ale_next_wrap)
-"
-" " let g:ale_set_highlights = 0 " Disable highligting
-"
-" highlight clear ALEErrorSign
-" highlight clear ALEWarningSign
 
 "--- Color Themes ---
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'rakr/vim-one'
 Plug 'Rigellute/shades-of-purple.vim'
+Plug 'arcticicestudio/nord-vim'
+
+" --- LaTeX ---
+Plug 'lervag/vimtex'
+autocmd Filetype tex setl updatetime=1
+let g:vimtex_quickfix_mode=0
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'skim'
+map <F1> :set spell spelllang=ru,en<CR>
 
 " -- Lightline --
 Plug 'itchyny/lightline.vim'
@@ -261,7 +271,6 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_raw = {'buffers': 1}
 let g:lightline#bufferline#clickable = 1
 
-
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 set showtabline=2
 
@@ -272,13 +281,46 @@ source $HOME/.config/nvim/keys.vim
 " --- Vim-Plug END ---
 call plug#end()
 
-" You must call deoplete#custom#source() after plug#end().
-" Because, plug#end() add plugins runtimepath.
-" call deoplete#custom#source('ultisnips', 'rank', 9999)
-
 " Register which key map
 call which_key#register(',', "g:which_key_map")
 
-let g:shades_of_purple_lightline = 1
-let g:lightline.colorscheme = 'shades_of_purple'
-color shades_of_purple
+" let g:shades_of_purple_lightline = 1
+" let g:lightline.colorscheme = 'shades_of_purple'
+let g:lightline.colorscheme = 'nord'
+
+color nord
+
+if has('nvim-0.5')
+" Treesitter settings
+:lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c", "cpp", "javascript", "typescript", "toml", "python"},
+  highlight = {
+	enable = true,
+  },
+}
+EOF
+
+:lua << EOF
+   local nvim_lsp = require('lspconfig')
+   local servers = {'clangd', 'jsonls', 'html', 'tsserver'}
+   local on_attach = function(_, bufnr)
+	   require('diagnostic').on_attach()
+	   require('completion').on_attach()
+	   local opts = { noremap=true, silent=true }
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>xD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>xr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+	   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>xd', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', opts)
+   end
+   for _, lsp in ipairs(servers) do
+	 nvim_lsp[lsp].setup {
+	 }
+   end
+EOF
+endif
