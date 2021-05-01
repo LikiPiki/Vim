@@ -169,11 +169,11 @@ let g:nvim_tree_show_icons = {
 nnoremap <leader>n :NvimTreeToggle<CR>
 " Install nightly neovim plugins, or use the COC for autocomplete
 if has('nvim-0.5')
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    " :lua require('lsp')
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " Neovim lua file manager
     
     Plug 'neovim/nvim-lspconfig'
+
     Plug 'hrsh7th/nvim-compe'
     let g:compe = {}
     let g:compe.enabled = v:true
@@ -299,3 +299,7 @@ call vimtex#imaps#add_map({
     }
 EOF
 
+if has('nvim-0.5')
+    " lua require('treesitter')
+    lua require('lsp')
+endif
