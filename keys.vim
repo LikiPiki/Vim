@@ -33,12 +33,6 @@ let g:which_key_map['w'] = [ ':AirlineToggleWhiteSpace', 'togle-whitespace']
 " For coc-explorer
 let g:which_key_map['E'] = [ ':CocCommand explorer --preset floating', 'file-tree-float']
 
-let g:which_key_map.e = {
-	\ 'name': "+Errors",
-	\ 's': ["ALEFixSuggest", "fix-suggest"],
-	\ 'f': ["ALEFix", "fix"],
-	\ } 
-
 let g:which_key_map.b = {
       \ 'name' : '+Buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
@@ -55,13 +49,12 @@ let g:which_key_map.b = {
 
 let g:which_key_map.u = {
       \ 'name' : '+Snippets' ,
-	  \ 'l' : [':CocList snippets', 'Snippets list' ],
 	  \ 'u' : [':UltiSnipsEdit', 'Ultisnips Edit' ],
       \ }
 
-let g:which_key_map.f = {
+let g:which_key_map.q = {
       \ 'name' : '+Files' ,
-	  \ 'f' : [':NERDTreeFind', 'Find file' ],
+	  \ 'f' : [':NvimTreeFindFile', 'Find file' ],
 	  \ 's' : [':w', 'Save' ],
 	  \ }
 

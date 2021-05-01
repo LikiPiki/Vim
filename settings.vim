@@ -8,11 +8,14 @@ set colorcolumn=80
 set tabstop=4
 set shiftwidth=4
 set smarttab
-set expandtab
 
 set smartindent
 set encoding=utf8
 set noet
+
+set ignorecase
+set smartcase
+
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
@@ -44,6 +47,8 @@ set signcolumn=yes
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
+
+set expandtab
 
 syntax on
 
