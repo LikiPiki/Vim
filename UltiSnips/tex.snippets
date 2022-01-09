@@ -2,93 +2,48 @@ snippet xedir "Xelatex directive"
 %!TeX program = xelatex$0
 endsnippet
 
-snippet titul "Titul page, for univercity"
-\def\caf{${1:14}}
-\def\prepod{${2:prepod_name}}
-\def\prepodz{${3:prepod_status}}
-\def\labname{${4:labname}}
-\def\labdist{${5:lab_dist}}
-
-\input{titul.tex}
-\titlepage
-$0
+snippet sympy "sympy block " w
+sympy $1 sympy$0
 endsnippet
 
-snippet simpledoc "The simple latex document"
-\documentclass[12pt]{article}
-\usepackage[english, russian]{babel}
-\usepackage{indentfirst}
-\usepackage{hyperref}
-
-\begin{document}
-	$0
-\end{document}
+priority 10000
+snippet 'sympy(.*)sympy' "evaluate sympy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
+    .replace('^', '**') \
+    .replace('{', '(') \
+    .replace('}', ')') + ')')
+`
 endsnippet
 
-snippet // "frac{}"
+snippet lss "lsinputlisting"
+\lstinputlisting[caption={Листинг файла ${1:filename}},language=${2:lang}]{src/$1}$0
+endsnippet
+
+snippet td "superscript" iA
+^{$1}$0
+endsnippet
+
+snippet // "frac{}" iA
 \frac{${1:${VISUAL}}}{$2}$0
 endsnippet
 
-snippet ^ "Power"
-{${1:${VISUAL}}}^{$2}$0
-endsnippet
-
-snippet use "\usepackage"
-\usepackage${2:[${1:params}]}{${3:package}}$0
-endsnippet
-
 snippet f "Insert inline formula"
-\($0
-endsnippet
-
-snippet pack_listing "Include lslisting package"
-\usepackage{listings}
-\lstset{
-    numberstyle=\footnotesize,
-    numbers=left,
-    tabsize=2,
-    title=\lstname,
-    breaklines=true,
-	xleftmargin=\parindent,
-	texcl=true
-}
-$0
-endsnippet
-
-snippet pack_graph "Include grapchics path"
-\usepackage{graphicx}
-\graphicspath{{${1:pictures/}}}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-$0
+\( $1 \) $0
 endsnippet
 	
 snippet incg "Include image"
-\begin{figure}[!h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[${1:width=0.5\textwidth}]{${2:logo}}
+	\includegraphics[${1:width=0.7\textwidth}]{${2:logo}}
 	\caption{$4}
 	\label{fig:${3:${2/(\w+).\w+/$1/}}}
 \end{figure}
-$0
-endsnippet
-
-snippet a4paper "Geometry package with A4 paper settings"
-\usepackage{geometry}
-\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1.5cm}
-$0
-endsnippet
-
-snippet pack_colorbox "ColorBox snippet"
-\usepackage[most]{tcolorbox}
-% My fancy boxes
-\newtcolorbox{mybox}[1][]{
-	enhanced,
-	arc=0pt,
-	outer arc=0pt,
-	colback=white,
-	boxrule=1pt,
-	#1
-}
 $0
 endsnippet
 

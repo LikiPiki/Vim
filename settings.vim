@@ -3,7 +3,7 @@ set cursorline
 
 set number
 set relativenumber
-set colorcolumn=80
+set colorcolumn=120
 
 set tabstop=4
 set shiftwidth=4
@@ -58,3 +58,5 @@ autocmd Filetype html setlocal tabstop=2
 autocmd Filetype htmldjango setlocal tabstop=2
 
 set mouse=a
+
+set nolazyredraw
