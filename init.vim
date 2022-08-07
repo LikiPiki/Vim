@@ -1,5 +1,3 @@
-"  init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
-"
 call plug#begin('~/.vim/plugged')
 
 " --- KeyMap ---
@@ -39,9 +37,10 @@ if has('nvim-0.5')
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
 
-    " For vsnip users.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
+    " lsp snippets
+    Plug 'dcampos/nvim-snippy'
+    Plug 'dcampos/cmp-snippy'
+    Plug 'honza/vim-snippets'
 
     set completeopt=menu,menuone,noselect
     set shortmess+=c
@@ -75,7 +74,7 @@ let g:lightline = {
             \               [ 'cocstatus', 'linter_errors', 'linter_warnings' ]]
             \   },
             \   'component_expand': {
-            \   },
+                \   },
             \   'component_function': {
             \       'gitbranch': 'FugitiveHead',
             \       'cocstatus': 'coc#status',
@@ -119,4 +118,5 @@ let g:nvim_tree_show_icons = {
      :lua require('cmp-config')
      :lua require('lsp')
      :lua require('tree')
+     :lua require('snippets')
  endif
