@@ -1,3 +1,5 @@
+"  init.vim by LikiPiki use Vim-Plug -> github.com/junegunn/vim-plug
+"
 call plug#begin('~/.vim/plugged')
 
 " --- KeyMap ---
@@ -37,9 +39,20 @@ if has('nvim-0.5')
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/nvim-cmp'
 
-    " lsp snippets
-    Plug 'dcampos/nvim-snippy'
+    " For new neovim version
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+
+    " Find files using Telescope command-line sugar.
+    " Using Lua functions
+    nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+    nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+    nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+    nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+    " For vsnip users.
     Plug 'dcampos/cmp-snippy'
+    Plug 'dcampos/nvim-snippy'
     Plug 'honza/vim-snippets'
 
     set completeopt=menu,menuone,noselect
@@ -74,7 +87,7 @@ let g:lightline = {
             \               [ 'cocstatus', 'linter_errors', 'linter_warnings' ]]
             \   },
             \   'component_expand': {
-                \   },
+            \   },
             \   'component_function': {
             \       'gitbranch': 'FugitiveHead',
             \       'cocstatus': 'coc#status',
