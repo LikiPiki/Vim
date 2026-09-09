@@ -1,5 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = {"c", "lua", "typescript", "tsx", "javascript", "vim"},
 
   sync_install = false,
 

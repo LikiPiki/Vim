@@ -10,8 +10,7 @@ set shiftwidth=4
 set smarttab
 
 set smartindent
-set encoding=utf8
-set noet
+set encoding=utf-8
 
 set ignorecase
 set smartcase
@@ -24,18 +23,15 @@ map <C-h> <C-w><Left>
 noremap <Down> <C-W>j
 noremap <Up> <C-W>k
 noremap <Left> <C-W>h
-noremap <Right> <C-W>l>
+noremap <Right> <C-W>l
 
 set inccommand=nosplit
 set nobackup
 set noswapfile
-set encoding=utf-8
 set fileencodings=utf8,cp1251
 set nocompatible
 set diffopt+=vertical
 set laststatus=2
-set encoding=utf8
-
 "--- Code folding ---
 set foldmethod=indent
 set foldlevel=12
