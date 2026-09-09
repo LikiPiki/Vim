@@ -1,16 +1,12 @@
-# Vim config by Likipiki
+# Neovim configuration
 
-<img src="https://raw.githubusercontent.com/LikiPiki/Vim/master/screenshot.png"/>
+## Installation
 
-This is my Vim/Neovim configuration with lsp support and snippets by Ultisnips
+- Create a symlink to the Neovim configuration:
 
-# Neovim config installation
 ```bash
-git clone https://github.com/LikiPiki/Vim ~/.config/nvim
+ln -s ~/Vim ~/.config/nvim
 ```
 
-# Installing script
-```bash
-curl -L https://raw.githubusercontent.com/LikiPiki/Vim/master/install.sh | bash
-```
-
+- Start Neovim. [lazy.nvim](https://github.com/folke/lazy.nvim) and all plugins
+  will be installed automatically.

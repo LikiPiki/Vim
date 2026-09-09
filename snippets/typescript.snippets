@@ -1,0 +1,7 @@
+snippet index
+	import { withPlatform } from '@lib/PlatformedRegistry';
+	import { ${1:Component} as base } from './${1}';
+
+	export * from './${1}.typings';
+	export const ${1} = withPlatform({ desktop: base, 'touch-phone': base });
+	$0

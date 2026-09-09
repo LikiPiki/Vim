@@ -1,0 +1,23 @@
+snippet i18n:
+    import i18nFactory from '@yandex-int/i18n';
+    import * as keyset from './${1:Block}.i18n';
+
+    const i18n = i18nFactory(keyset);
+    $0
+
+snippet composeu:
+	import { composeU } from '@bem-react/core';
+	$0
+
+snippet compose:
+	import { compose } from '@bem-react/core';
+	$0
+
+snippet component
+	export const ${1:Component}: React.FC<I${1}Props> = props => {
+		return (
+			<div>
+				${0:Test ${1}}
+			</div>
+		);
+	};
