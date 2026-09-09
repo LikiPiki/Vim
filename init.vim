@@ -44,13 +44,12 @@ let g:lightline = {
             \               [ 'spell', 'readonly', 'filetype', 'filename' ]],
             \       'right': [ [ 'percent' ], [ 'lineinfo' ],
             \               [ 'fileformat', 'fileencoding' ],
-            \               [ 'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \               [ 'linter_errors', 'linter_warnings' ]]
             \   },
             \   'component_expand': {
             \   },
             \   'component_function': {
             \       'gitbranch': 'FugitiveHead',
-            \       'cocstatus': 'coc#status',
             \       'currentfunction': 'helpers#lightline#currentFunction'
             \   },
             \   'component_type': {
